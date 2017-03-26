@@ -1,0 +1,198 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+<body onload="load()">
+	<div class="right_wrap">
+		<div class="selecter">
+			<a class="dfr glo-btn-os" href="javascript:void(0)">Print</a>
+			<a class="dfr glo-btn-os mgr10" href="javascript:void(0)">Export</a>
+			<span class="txs16">Select Time&nbsp;&nbsp;</span>
+			<input type="text" class="inp_sml_nolenth inp-ws2 searchParam" id="beginTime" />
+			<span class="pdl10 pdr10">to</span>
+			<input type="text" class="inp_sml_nolenth inp-ws2 searchParam" id="endTime"/>
+			<a href="javascript:void(0)" class="searchBtn"><img src="../img/btn_ser.png" /></a>
+		</div>
+		
+		<div class="main_part pdt30">
+			<div class="left_mod">
+				<div class="clearfix">
+					<input type="text" class="inp_sml_nolenth inp-ctm249 dfl searchParam" id="payType" placeholder="Search Receipt or Card" />
+					<a href="javascript:void(0)" class="dfl"><img src="../img/btn_ser2.png" class="searchBtn"/></a>
+				</div>
+				<div class="order_list mgt10">
+					
+				</div>
+				<div class="popular_food pdt20 pdb30">
+					<p class="txw1 txs18">Most Popular Item:</p>
+					<p class="txw1 txs18 r1">#56 BASIL CASHEW CHICKEN</p>
+				</div>
+			</div>
+			
+			<div class="right_mod" id="billContent">
+				<div class="txw1 txs18">$ TOTAL SALE AMOUNT</div>
+				<div class="cutline3"></div>
+			</div>
+			
+		</div>
+		
+	</div>
+</body>
+#end
+#override("footer")
+<script type="text/javascript">
+	function initTime(){
+		var now = new Date();
+		var st = now.format("yyyy-MM-dd");
+		var begin = st+" 00:00";
+		var end = st+" 23:59";
+		$('#beginTime').datetimepicker();
+		$('#beginTime').datetimepicker('setDate',begin.parseDate('yyyy-MM-dd HH:mm'));
+		$('#endTime').datetimepicker();
+		$('#endTime').datetimepicker('setDate',end.parseDate('yyyy-MM-dd HH:mm'));
+	}
+	function refreshList(){
+			var beginTime = $('#beginTime').val();
+			var endTime = $('#endTime').val();
+			var beginDate = beginTime.parseDate('yyyy-MM-dd HH:mm')
+			var endDate = endTime.parseDate('yyyy-MM-dd HH:mm')
+			var now = new Date();
+			var st = now.format("yyyy-MM-dd");
+			var begin = st+" 00:00";
+			var end = st+" 23:59";
+			if(beginDate>=begin.parseDate('yyyy-MM-dd HH:mm')&&endDate<=end.parseDate('yyyy-MM-dd HH:mm')){
+				$('.searchBtn').eq(0).click();
+			}
+	}
+	setInterval(refreshList,60000);
+	function load(){
+			initTime();
+			$.extend({
+			BACK:{
+				activityItem:function(billId){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/activity/item",
+							success:function(data){
+								var content = $("#billContent");
+								var bill = data.result.bill;
+								var billItemList =bill.billItemList;
+								var showList ="";
+								showList +="<div class='txw1 txs18'>$ TOTAL SALE AMOUNT</div>";
+								showList +="<div class='cutline3'></div>";
+								showList +="<div class='txs16 pdb10'>";
+								showList +="<span class='g1 dfr'>"+bill.timeDate+"</span>";
+								if(bill.paymentType=='Cash'){
+									showList +="<strong>Cash Payment</strong>";
+								}else{
+									showList +="<strong>Credit Card Payment</strong>";
+								}
+								
+								showList +="</div>";
+								showList +="<div class='pay_info'>";
+								if(bill.paymentType=='Cash'){
+									showList +="<div class='cash'>";
+								}else{
+									showList +="<div class='credit'>";
+									showList +="<span class='dfr'>Receipt Number 20124547</span>Credit Card 5173";	
+								}
+								showList +="</div>";
+								showList +="</div>";
+								showList +="<div class='buying_details pdb30'>";
+								showList +="<div class='cutline1 pdb10'>TO GO</div>";
+								showList +="<div class='detail_list pdt10'>";
+								showList +="<div class='left_md txw1 txs20'>ITEMS</div>";
+								showList +="<div class='right_md' >";
+								if(billItemList.length>0){
+									var billItem;
+									for(var i=0;i<billItemList.length;i++){
+										billItem = billItemList[i];
+										showList +="<div class='cp'>";
+										showList +="<p class='txs16 txw1'><span class='dfr'>$"+billItem.price+"</span>"+billItem.goodsName+"</p>";
+										if(billItem.extraInfo!=null){
+											showList +="<p class='g1'>"+billItem.extraInfo+"</p>";
+										}else{
+											showList +="<p class='g1'></p>";
+										}
+										
+										showList +="</div>";
+									}
+									showList +="<div class='cutline1'></div>";
+									showList +="<div class='cutline1 pdt20 pdb20'>";
+									showList +="<p class='txs16 txw1'><span class='dfr'>$"+bill.subTotal+"</span>Subtotal</p>";
+									showList +="<p class='txs16 txw1'><span class='dfr'>$"+bill.salesTax+"</span>Sales Tax</p>";
+									showList +="</div>";
+									showList +="<div class='pdt10 txs16 txw1'><span class='dfr txs22'>$"+bill.total+"</span>Total</div>";
+								}
+								showList +="</div>";
+								showList +="</div>";
+								showList +="</div>";
+								content.empty();
+								content.append(showList);
+							},
+							
+							param:{"billId":billId}
+						}
+					);
+				},
+				searchItem:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/activity/list",
+							success:function(data){
+								var backBillList = data.result.backBillList; 
+								var content ="";
+								$.each(backBillList,function(index,va){
+									content+="<div class='cp backBillItem' bill_id = '"+va.id+"'>";
+									 if(va.paymentType=='Cash'){
+									 	 content+="<div class='cash clearfix'>";
+									 }else if(va.paymentType=='Credit'){
+									 	 content+="<div class='credit clearfix'>";
+									 }else{
+									 	 content+="<div class='clearfix'>";
+									 }
+									 content+="<span class='g1 dfr'>"+va.timeAF+"</span><span class='txw1 o1'>$"+va.total+"</span></div>";
+									 content+="<div class='pdt04'>"+va.goodsName+"</div>";
+								     content+="</div>";
+								});
+								$(".order_list").empty();
+								$(".order_list").append(content);
+								$(".backBillItem").eq(0).click();
+							},
+							param:par
+						}
+					);
+				}
+			}
+		});
+	
+		$(".order_list").on("click",".backBillItem",function(){
+			$(".backBillItem").removeClass("on");
+			var $this = $(this)
+			if(!$this.hasClass("on")){
+				$this.addClass("on");
+				var billId = $this.attr("bill_id");
+				$.BACK.activityItem(billId);
+			}
+		});
+		
+		var param ={};
+		$('.searchBtn').click(function(){
+			param ={};
+			$('.searchParam').each(function(){
+				var id = $(this).attr("id");
+				param[id] =$(this).val();
+			});
+			$("#billContent").empty();	
+			$.BACK.searchItem(param);
+		}).eq(0).click();
+		
+		
+		
+	}
+	
+	
+</script>
+#end
+#extends("/layout/layoutback.vm")

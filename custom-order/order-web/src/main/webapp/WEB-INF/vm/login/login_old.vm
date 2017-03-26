@@ -1,0 +1,45 @@
+#override("body")
+	<div class="modal login" style="display: block; width:402px;">
+		<form action="login_check" name="login_modal" class="form-horizontal" method="post">
+			<div class="modal-header">
+				<button type="button" class="close login_close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>用户登录</h3>
+            </div>      
+            <div class="modal-body">
+            	<table class="edit_table">
+                	<tr>
+                		<td><label class="control-label">用户名</label></td>
+                		<td class="textbox_ui">
+                		<input type="text" name="username" id="username" required />
+                		<div class="invalid popover bottom">
+                            <div class="arrow"></div>
+                            <div class="required">请输入用户名</div>
+                            <div class="custom"></div>
+                            <div class="format">请输入有效的用户名</div>
+                        </div>
+                		</td>
+                	</tr>
+                	<tr>
+                		<td><label class="control-label">密 &nbsp;&nbsp;&nbsp;码</label></td>
+                		<td class="textbox_ui">
+                		<input type="password" name="password" id="password" required />
+                		<div class="invalid popover bottom">
+                            <div class="arrow"></div>
+                            <div class="required">请输入密码</div>
+                            <div class="custom"></div>
+                            <div class="format">请输入有效的密码</div>
+                        </div>
+                		</td>
+                	</tr>
+            	</table>
+            </div>
+			<input type="hidden" name="loginSuccess" value="/main/index"/>
+            <div class=modal-footer>
+            	<div class="btn-toolbar">
+            		<button class="btn btn-primary" type="submit" id="login_btn">登录</button>
+            	</div>
+            </div>
+        </form>
+	</div>
+#end
+#extends("/layout/layout.vm")

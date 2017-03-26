@@ -1,0 +1,11 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+	装修中……
+#end
+#override("footer")
+  
+#end
+#extends("/layout/layoutback.vm")

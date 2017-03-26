@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.order.datasource.dao.UserRoleRelationDAO">
+	
+	<sql id="columns">
+		id,
+		<include refid="columnsWithOutId"/>
+	</sql>
+	
+	<sql id="columnsWithOutId">
+		user_id,
+		role_id,
+		create_time,
+		create_user
+	</sql>
+	
+	<sql id="columnsForRole">
+		r.role_code,
+		r.role_name,
+		r.partter,
+		r.description,
+		r.create_user,
+		r.create_time,
+		r.update_user,
+		r.update_time
+	</sql>
+	
+	<sql id="columnsForUser">
+		u.username,
+		u.password,
+		u.nick_name,
+		u.email,
+		u.phone,
+		u.is_active,
+		u.create_time,
+		u.update_user,
+		u.update_time,
+		u.create_user
+	</sql>
+	
+		<resultMap type="com.order.datasource.domain.UserRoleRelation" id="resultUserRole">
+		<result column="id" property="id"/>
+		<result column="role_id" property="roleId"/>
+		<result column="user_id" property="userId"/>
+		<result column="create_user" property="createUser"/>
+		<result column="create_time" property="createTime"/>
+	</resultMap>
+	
+	<resultMap type="com.order.datasource.domain.User" id="resultUser">
+		<result column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="nick_name" property="nickName"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		<result column="is_active" property="isActive"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_user" property="updateUser"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="create_user" property="createUser"/>
+	</resultMap>
+	
+	<resultMap type="com.order.datasource.domain.Role" id="resultRole">
+		<result column="id" property="id"/>
+		<result column="role_code" property="roleCode"/>
+		<result column="role_name" property="roleName"/>
+		<result column="partter" property="partter"/>
+		<result column="description" property="description"/>
+		<result column="create_user" property="createUser"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_user" property="updateUser"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+			
+	<insert id="save">
+		insert into user_role_relation 
+			(<include refid="columnsWithOutId"/>)
+		value 
+		(
+			#{userId},	
+			#{roleId},
+			now(),
+			#{createUser}
+		) 	
+	</insert>
+	
+	<update id="update">
+		update 
+			user_role_relation 
+		set 
+			role_code = #{roleCode},
+			username = #{username}
+		where
+			id = #{id} 
+	</update>
+	
+	<delete id="delete">
+		delete from 
+			user_role_relation 
+		where 
+			id = #{0}
+	</delete>
+	
+	<delete id="deletes">
+		delete from 
+			user_role_relation 
+		where 
+			id in 
+			<if test="ids != null"> 
+				<foreach collection="ids" item="item" open="(" separator="," close=")">  
+       				#{item}   
+    			</foreach>
+			</if>
+	</delete>
+	
+	<select id="findRolesByUserId" resultMap="resultRole">
+		select
+			<include refid="columnsForRole"/>
+		from 
+			sys_user u join user_role_relation urr on u.id=urr.user_id
+			join role r on urr.role_id = r.id
+		where 
+			u.id = #{0}
+	</select>
+	
+	<select id="findUsersByRoleId" resultMap="resultUser">
+		select
+			<include refid="columnsForRole"/>
+		from 
+			sys_user u join user_role_relation urr on u.id=urr.user_id
+			join role r on urr.role_id = r.id
+		where 
+			r.id = #{0}
+	</select>
+</mapper>

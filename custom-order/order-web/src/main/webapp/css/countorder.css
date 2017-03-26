@@ -1,0 +1,59 @@
+.timelabel,.timeend{
+    position:absolute;
+}
+.timeend{
+    margin-left:25px;
+}
+.timelabel{
+    line-height: 30px;
+    margin-left: 5px;
+}
+.checkbaseinfo{
+    padding:20px 0;
+}
+.checkbaseinfo .control-label{
+   width:35px;
+}
+.checkbaseinfo input[type=text]{
+    margin-right:20px;
+}
+.multiple-form h4{
+    line-height:40px;
+}
+.tablewrap {
+    max-height: 206px;
+    overflow-y: auto;
+}
+.modal-header{
+    cursor:move;
+}
+.modal-header .close_modal_tab {
+    background: url("images/glyphicons-halflings-lightgray.png") -314px -2px no-repeat;
+    position: absolute;
+    right: 8px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+#quickcheck_Modal .innerinput{
+    width: 50px;
+}
+#quickcheck_Modal input[type=radio]{
+    position: relative;
+    top: 3px;
+}
+.rightmultiple{
+    width: 180px;
+    height: 220px;
+    /*position: absolute;*/
+    /*top: 10px;*/
+    /*right: 35px;*/
+    margin-left: 20px;
+}
+#quickCountModal{
+	width: 870px;
+}
+#getConfirmDiffTaskDetails{
+	width: 870px;
+}

@@ -1,0 +1,120 @@
+#override("header")
+<link rel="stylesheet" href="${request.contextPath}/css/perfect-scrollbar.min.css"/>
+#end
+#override("body")
+
+	<div class="tab-pane main_wrap box" id="content">
+		  <form action="updateUserInfo" name="content_form" class="form-horizontal" id="content_form">
+            <div class="btn-toolbar">
+                <button class="btn btn-primary save" type="submit"> <i class="icon_save"></i>保存  </button>
+            </div>
+            <div class="tab-content">
+				<div class="tab-pane active" id="base_info">
+                   <table class="edit_table">
+                      <tr>
+						 <td>
+							<label class="control-label">开启邮件发送</label>
+                         </td>
+						 <td>	
+							<input type="checkbox" class="span2 in_storage_num param " id="isSendEmail" name="isSendEmail" #if ($systemConfig.isSendEmail) checked  #end/>
+						 </td>
+						 <td>
+							<label class="control-label ">开启短信发送</label>
+						 </td>
+                         <td>
+							<input type="checkbox" class="span2 in_storage_num param" id="isSendSms" name="isSendSms" #if ($systemConfig.isSendSms) checked  #end/>
+                         </td>
+                      </tr>
+					  <tr>
+						  <td col='4'>
+							<h3>邮件配置</h3>
+						  </td>
+                      </tr>
+					  <tr>
+						  <td>
+							<label class="control-label ">邮件地址</label>
+						  </td>
+						  <td>
+							<input type="text" class="span2 in_storage_num param" id="emailAddress" name="emailAddress" value="$!{systemConfig.emailAddress}"/>
+                         </td>
+						 <td>
+							<label class="control-label ">邮件协议</label>
+						 </td>
+                         <td>
+							<input type="text" class="span2 in_storage_num param" id="emailProtocol" name="emailProtocol" value="$!{systemConfig.emailProtocol}"/>
+                         </td>
+                      </tr>
+					  <tr>
+						  <td>
+							<label class="control-label ">邮件秘钥</label>
+						  </td>
+						  <td>
+							<input type="text" class="span2 in_storage_num param" id="emailSecret" name="emailSecret" value="$!{systemConfig.emailSecret}"/>
+                         </td>
+						 <td>
+							<label class="control-label ">邮件版本</label>
+						 </td>
+                         <td>
+							<input type="text" class="span2 in_storage_num param" id="emailVersion" name="emailVersion" value="$!{systemConfig.emailVersion}"/>
+                         </td>
+                      </tr>
+					  <tr>
+						  <td>
+							<label class="control-label ">邮件类</label>
+						  </td>
+						  <td>
+							<input type="text" class="span2 in_storage_num param" id="emailClass" name="emailClass" value="$!{systemConfig.emailClass}"/>
+                         </td>
+						 <td>
+							<label class="control-label ">邮件方法</label>
+						 </td>
+                         <td>
+							<input type="text" class="span2 in_storage_num param" id="emailMethod" name="emailMethod" value="$!{systemConfig.emailMethod}"/>
+                         </td>
+                      </tr>
+					  <tr>
+						  <td>
+							<label class="control-label ">邮件类型</label>
+						  </td>
+						  <td col='3'>
+							<input type="text" class="span2 in_storage_num param" id="emailType" name="emailType" value="$!{systemConfig.emailType}" />
+                         </td>
+                      </tr>
+					  <tr>
+						  <td col='4'>
+							<h3>短信配置</h3>
+						  </td>
+                      </tr>
+					  <tr>
+						  <td>
+							<label class="control-label">短信账号</label>
+						  </td>
+						  <td>
+							<input type="text" class="span2 in_storage_num param" id="smsAccount" name="smsAccount" value="$!{systemConfig.smsAccount}"/>
+                         </td>
+						 <td>
+							<label class="control-label ">短信密码</label>
+						 </td>
+                         <td>
+							<input type="text" class="span2 in_storage_num param" id="smsPassword" name="smsPassword" value="$!{systemConfig.smsPassword}"/>
+                         </td>
+                      </tr>
+					  <tr>
+						  <td>
+							<label class="control-label ">短信加密</label>
+						  </td>
+						  <td col='3'>
+							<input type="checkbox" class="span2 in_storage_num param" id="smsEncrypt" name="smsEncrypt" #if ($systemConfig.smsEncrypt) checked  #end/>
+                         </td>
+                      </tr>
+                   </table>
+                </div>
+			</div>
+			<input type="hidden" id="id" name="id" value="$!{systemConfig.id}"/>
+    	</form>
+     </div>	 
+#end
+#override("footer")
+<script type="text/javascript" src="${request.contextPath}/js/config/system_config.js"></script>
+#end
+#extends("/layout/layout.vm")

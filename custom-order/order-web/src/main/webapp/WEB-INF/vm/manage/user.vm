@@ -1,0 +1,164 @@
+#override("header")
+<link rel="stylesheet" href="${request.contextPath}/css/perfect-scrollbar.min.css"/>
+#end
+#override("body")
+	<div class="tabWrap">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#search" data-toggle="tab">查询</a></li>
+            <li class=""><a href="#list" data-toggle="tab">列表</a></li>
+            <li class=""><a href="#content" data-toggle="tab" id="tab_content_head">内容</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <!--右边内容区域-->
+    
+            <div class="tab-pane main_wrap box active" id="search">
+                <form action="" class="form-horizontal" method="get" name="search_form">
+    
+                    <div class="control-group">
+                        <table class="edit_table">
+                            <tr>
+                            	
+                                <td><label class="control-label">用户名</label></td>
+                                <td class="textbox_ui">
+                                    <input type="text" class="span2 in_storage_num" name="username" >       
+                                </td>
+                            </tr>
+    						<tr>
+                                <td><label class="control-label">用户别名</label></td>
+                                <td class="textbox_ui">
+                                    <input type="text" class="span2 in_storage_num" name="nickName"> 
+                                             
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+    								
+                                    <button class="btn btn-success" type="button" id="submit_search" >查询</button>
+    								
+                                </td>
+                            </tr>
+                        </table>
+    
+    
+                            <!--<a class="help-inline">修改 hash_id</a>-->
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane main_wrap box" id="list">
+                <div class="btn-toolbar">
+    				
+                    <button class="btn btn-primary add" id="createBtn"><i class="icon_add"></i>新建</button>
+    				
+                    <button class="btn btn-primary del" id="deleteBtn"><i class="icon_del"></i>删除</button>
+    				
+                    <button class="btn btn-primary refresh" id="refreshBtn" ><i class="icon_refresh"></i>刷新</button>
+    				
+                    <!--<p id="ceshi_id">测试测试双击事件～～</p>-->
+                </div>
+                <table class="table table-bordered table-striped tb-lightgreen dataTable table-hover listTable" id="table1">
+                    <thead>
+                        <tr>
+                            <th width="20" name="id"><input name="chkAll" type="checkbox" value="1" class="checkAll chIe6"/></th>
+                            <th name="username">用户名</th>
+                            <th name="nickName">别名</th>
+							<th name="phone">电话</th>
+							<th name="email">email</th>
+                        </tr>
+                    </thead>
+                    <tbody id="search_list">
+                   
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane main_wrap box" id="content">
+    		  <form action="saveOrUpdate" name="content_form" class="form-horizontal" id="content_form">
+                <div class="btn-toolbar">
+                    <button class="btn btn-primary save" type="submit"> <i class="icon_save"></i>保存  </button>
+                </div>
+                <div class="tab-content">
+    				<div class="tab-pane active" id="base_info">
+                       <table class="edit_table">
+                          <tr>
+							 <td>
+								<label class="control-label">用户名</label>
+                             </td>
+							 <td class="textbox_ui">	
+								<input type="text" class="span2 in_storage_num param" required id="username" name="username" uneditable>
+								<div class="invalid popover right">
+                                    <div class="arrow"></div>
+                                    <div class="required">请输入用户ID</div>
+                                    <div class="custom"></div>
+                                    <div class="format"></div>
+                                </div>
+							 </td>
+							 <td>
+								<label class="control-label ">别名</label>
+							 </td>
+                             <td>
+								<input type="text" class="span2 in_storage_num param" id="nickName" name="nickName">
+                             </td>
+                          </tr>
+                          <!--
+						  <tr>
+							 <td>
+								<label class="control-label ">密码</label>
+                             </td>	
+							 <td class="textbox_ui">
+								<input type="password" class="span2 in_storage_num param" required id="password" name="password">
+								<div class="invalid popover right">
+                                    <div class="arrow"></div>
+                                    <div class="required">请输入密码</div>
+                                    <div class="custom"></div>
+                                    <div class="format"></div>
+                                </div>	  
+							 </td>
+							 <td>
+								<label class="control-label ">确认密码</label>
+							 </td>
+                             <td class="textbox_ui">
+								<input type="password" class="span2 in_storage_num param" required id="retypePassword" name="retypePassword">
+								<div class="invalid popover right">
+                                    <div class="arrow"></div>
+                                    <div class="required">请输入密码</div>
+                                    <div class="custom"></div>
+                                    <div class="format"></div>
+                                </div>
+							 </td>
+                          </tr>
+                          -->
+						  <tr>
+							  <td>
+								<label class="control-label ">email</label>
+							  </td>
+							  <td>
+								<input type="text" class="span2 in_storage_num param" id="email" name="email">
+                             </td>
+							 <td>
+								<label class="control-label ">电话</label>
+							 </td>
+                             <td class="textbox_ui">
+								<input type="text" class="span2 in_storage_num param" id="phone" name="phone" pattern="\d+">
+								<div class="invalid popover right">
+                                    <div class="arrow"></div>
+                                    <div class="required"></div>
+                                    <div class="custom"></div>
+                                    <div class="format">请输入正确的电话</div>
+                                </div>	
+							 </td>
+                          </tr>
+                          <tr id="roleContainer">
+						  </tr>
+                       </table>
+                    </div>
+    			</div>
+				<input type="hidden" id="id" name="id">
+    		  </form>
+            </div>
+        </div>
+    </div>
+#end
+#override("footer")
+<script type="text/javascript" src="${request.contextPath}/js/manage/user.js"></script>
+#end
+#extends("/layout/layout.vm")

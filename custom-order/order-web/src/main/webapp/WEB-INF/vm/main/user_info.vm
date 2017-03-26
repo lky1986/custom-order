@@ -1,0 +1,51 @@
+#override("header")
+<link rel="stylesheet" href="${request.contextPath}/css/perfect-scrollbar.min.css"/>
+#end
+#override("body")
+	<div class="tab-pane main_wrap box" id="content">
+		  <form action="updateUserInfo" name="content_form" class="form-horizontal" id="content_form">
+            <div class="btn-toolbar">
+                <button class="btn btn-primary save" type="submit"> <i class="icon_save"></i>Save  </button>
+            </div>
+            <div class="tab-content">
+				<div class="tab-pane active" id="base_info">
+                   <table class="edit_table">
+                      <tr>
+						 <td>
+							<label class="control-label">UserName</label>
+                         </td>
+						 <td>	
+							<input type="text" class="span2 in_storage_num param disable" id="userCode" name="userCode" value="${user.userCode}" disabled="true">
+						 </td>
+						 <td>
+							<label class="control-label ">Alias</label>
+						 </td>
+                         <td>
+							<input type="text" class="span2 in_storage_num param" id="nickName" name="nickName" value="${user.nickName}">
+                         </td>
+                      </tr>
+					  <tr>
+						  <td>
+							<label class="control-label ">Email</label>
+						  </td>
+						  <td>
+							<input type="text" class="span2 in_storage_num param" id="email" name="email" value="${user.email}">
+                         </td>
+						 <td>
+							<label class="control-label ">Phone</label>
+						 </td>
+                         <td>
+							<input type="text" class="span2 in_storage_num param" id="phone" name="phone" value="${user.phone}">
+                         </td>
+                      </tr>
+                   </table>
+                </div>
+			</div>
+			<input type="hidden" id="id" name="id" value="${user.id}">
+    	</form>
+     </div>
+#end
+#override("footer")
+<script type="text/javascript" src="${request.contextPath}/js/main/user_info.js"></script>
+#end
+#extends("/layout/layout.vm")

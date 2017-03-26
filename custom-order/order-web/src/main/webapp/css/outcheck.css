@@ -1,0 +1,52 @@
+.wrap{
+    width:1200px;
+}
+.mainleft{
+    display:inline-block;
+    width:945px;
+    min-height:400px;
+}
+.rightbar{
+    float:right;
+    width:245px;
+    padding-top: 170px;
+}
+.upblock{
+    padding-bottom:10px;
+}
+.upblock input.doublewidthinput {
+    width: 484px;
+}
+.downblock{
+    padding-top:20px;
+}
+.leftbar{
+    float:left;
+}
+.maininput{
+    float:left;
+}
+.maininput input[type=text]{
+    width:180px;
+}
+
+.maininput .control-label{
+    padding-left: 35px;
+    padding-right: 15px;
+    text-align: right;
+    min-width: 60px;
+}
+.table_right{
+    padding-left:10px;
+    margin-top:10px;
+    width: 860px;
+    margin-left: 45px;
+}
+.btncenter{
+    margin-top: 20px;
+    padding: 6px 40px;
+    margin-left: 20px;
+}
+.rtablewrap{
+    padding-top:30px;
+}

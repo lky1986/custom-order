@@ -1,0 +1,19 @@
+#trade {
+	width: 200px;
+}
+
+#case_list {
+	height: 300px;
+}
+
+#condition {
+	padding-top: 15px;
+}
+
+#trade_case_info {
+	padding: 10px;
+}
+
+.select {
+	padding-left: 20px;
+}
