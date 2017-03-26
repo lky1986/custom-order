@@ -1,0 +1,11 @@
+package com.order.datasource.dao;
+
+
+import com.nl.common.db.dao.BaseDAO;
+import com.order.datasource.domain.User;
+
+public interface UserDAO extends BaseDAO<User,Integer> {
+	
+	
+	
+}

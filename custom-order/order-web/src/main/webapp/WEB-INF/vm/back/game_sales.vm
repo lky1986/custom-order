@@ -1,0 +1,182 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+<body onload="load()">
+	<div class="right_wrap">
+		<div class="selecter">
+			<a class="dfr glo-btn-os" href="javascript:void(0)">Print</a>
+			<a class="dfr glo-btn-os mgr10" href="javascript:void(0)">Export</a>
+			<span class="txs16">Select Time&nbsp;&nbsp;</span>
+			<input type="text" class="inp_sml_nolenth inp-ws2 searchParam" id="beginTime" />
+			<span class="pdl10 pdr10">to</span>
+			<input type="text" class="inp_sml_nolenth inp-ws2 searchParam" id="endTime"/>
+			<a href="javascript:void(0)" class="searchBtn"><img src="../img/btn_ser.png" /></a>
+		</div>
+		
+		<div class="main_part pdt20">
+			<div>
+				<select class="inp_sml_nolenth inp-ws2">
+					<option>Select Device #</option>
+					<option>123</option>
+					<option>123</option>
+				</select>
+				<input class="inp_sml_ctm150" type="button" value="Select All Device"/>
+			</div>
+			<div class="boards pdt20 clearfix">
+				<div class="txs16 txw1 pdb10">Over View</div>
+				<div class="cp1">
+					<p class="txs20 txw1" id="totalPrice">$ 0.00</p>
+					<p class="txs16">Gross Sales</p>
+				</div>
+				<div class="cp2">
+					<p class="txs20 txw1" id="orderTotal">0</p>
+					<p class="txs16"># of Transactions</p>
+				</div>
+				<div class="cp3">
+					<p class="txs20 txw1" id="avgPrice">$ 0.00</p>
+					<p class="txs16">Avg. Sale</p>
+				</div>
+			</div>
+			
+			
+			<div class="tabs clearfix pdt20">
+				<div class="leftmd1">
+					<table class="std_tab totaltab" id="leftTable">
+						
+					</table>
+				</div>
+				<div class="rightmd1">
+					<table class="std_tab totaltab" id="rightTable">
+						
+					</table>
+				</div>
+				<div class="clear"></div>
+				<div class="pages pdt20 txal clearfix" id="pages">
+					
+				</div>
+				<div class="cut_line"></div>
+				<div class="game_status clearfix pdb30" id="gameContent">
+					<div class="txs18 txw1 pdb10">Game Status</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+#end
+#override("footer")
+<script type="text/javascript">
+	function initTime(){
+		var now = new Date();
+		var st = now.format("yyyy-MM-dd");
+		var begin = st+" 00:00";
+		var end = st+" 23:59";
+		$('#beginTime').datetimepicker();
+		$('#beginTime').datetimepicker('setDate',begin.parseDate('yyyy-MM-dd HH:mm'));
+		$('#endTime').datetimepicker();
+		$('#endTime').datetimepicker('setDate',end.parseDate('yyyy-MM-dd HH:mm'));
+	}
+	function refreshList(){
+			var beginTime = $('#beginTime').val();
+			var endTime = $('#endTime').val();
+			var beginDate = beginTime.parseDate('yyyy-MM-dd HH:mm')
+			var endDate = endTime.parseDate('yyyy-MM-dd HH:mm')
+			var now = new Date();
+			var st = now.format("yyyy-MM-dd");
+			var begin = st+" 00:00";
+			var end = st+" 23:59";
+			if(beginDate>=begin.parseDate('yyyy-MM-dd HH:mm')&&endDate<=end.parseDate('yyyy-MM-dd HH:mm')){
+				$('.searchBtn').eq(0).click();
+			}
+	}
+	setInterval(refreshList,60000);
+	function load(){
+		initTime();
+		$.extend({
+			BACK:{
+				searchItem:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/game_sales/list",
+							success:function(data){
+								var total = data.result.total;
+								var page = data.result.page;
+								var game = data.result.game;
+								var param = data.result.param;
+								$("#totalPrice").text("$ "+total.price);
+								$("#orderTotal").text(total.total);
+								$("#avgPrice").text("$ "+total.av);
+								var dataList = page.dataList;
+								var left = "";
+								var right ="";
+								for(var i=0;i<14;i++){
+									if(i%2==0){
+										if(i>=dataList.length){
+											left +="<tr>";
+											left +="<th class='txs16'></th>";
+											left +="<td class='txs18 txw1'></td>";
+											left +="</tr>";
+										}else{
+											left+="<tr>";
+											left+="<th class='txs16'>"+dataList[i].day+"</th>";
+											left+="<td class='txs18 txw1'>"+dataList[i].price+"</td>";
+											left+="</tr>";
+										}
+									}else{
+										if(i>=dataList.length){
+											right +="<tr>";
+											right+="<th class='txs16'></th>";
+											right+="<td class='txs18 txw1'></td>";
+											right+="</tr>";
+										}else{
+											right+="<tr>";
+											right+="<th class='txs16'>"+dataList[i].day+"</th>";
+											right+="<td class='txs18 txw1'>"+dataList[i].price+"</td>";
+											right+="</tr>";
+										}
+									}
+								}
+								var gameContent = "<div class='txs18 txw1 pdb10'>Game Status</div>";
+								for(var i=0;i<game.length;i++){
+									gameContent+="<div class='cp'>"+(i+1)+"."+game[i].goodsName+" Total Sales :<span class='o1 txw1'>$"+game[i].price+"</span></div>"
+								}
+								var total = page.pageNum; 
+								var currentPage = page.page;
+								var pageContent = $.createPage(currentPage,total);
+								$("#pages").data("param",data.result.param);
+								$("#pages").empty();
+								$("#pages").append(pageContent);
+								$("#leftTable").empty();
+								$("#leftTable").append(left);
+								$("#rightTable").empty();
+								$("#rightTable").append(right);
+								$("#gameContent").empty();
+								$("#gameContent").append(gameContent);
+							},
+							param:par
+						}
+					);
+				}
+			}
+		});
+		
+		var param ={};
+		$('.searchBtn').click(function(){
+			param ={};
+			$('.searchParam').each(function(){
+				var id = $(this).attr("id");
+				param[id] =$(this).val();
+			})
+			$.BACK.searchItem(param);
+		}).eq(0).click();
+		$('#pages').on("click",".page_item",function(){
+			var page = $(this).text();
+			var param = $('#pages').data("param");
+			param.page = page;
+			$.BACK.searchItem(param);
+		})
+	}
+</script>
+#end
+#extends("/layout/layoutback.vm")

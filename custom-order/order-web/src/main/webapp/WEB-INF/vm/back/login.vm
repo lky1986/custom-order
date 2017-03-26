@@ -1,0 +1,20 @@
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+	<div class="pdt10 txac"><img src="../img/jukeslot_logo.png"/></div>
+	<div class="pdt100 txac"><img src="../img/rolypoly_logo.png"/></div>
+	<div class="pdt30 txac">
+		<input type="text" class="inp_sml_login1" value="" placeholder="Email address" />		
+	</div>
+	<div class="pdt15 txac">
+		<input type="password" class="inp_sml_login2" value="" placeholder="Password" />
+	</div>
+	<div class="pdt15 txac">
+		<input type="submit" class="inp_sml_login3" value="Login" />
+	</div>
+#end
+#override("footer")
+
+#end
+#extends("/layout/back.vm")

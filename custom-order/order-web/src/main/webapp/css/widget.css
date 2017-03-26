@@ -1,0 +1,92 @@
+.profile-user-info-striped {
+	border: 1px solid #dcebf7;
+}
+.profile-user-info {
+	margin: 10px 12px;
+}
+.profile-info-row {
+position: relative;
+min-height: 30px;
+}
+.profile-info-row:first-child .profile-info-name {
+border-top: 0;
+}
+.profile-user-info-striped .profile-info-name {
+color: #336199;
+background-color: #edf3f4;
+border-top: 1px solid #f7fbff;
+}
+.profile-info-name {
+position: absolute;
+width: 110px;
+text-align: right;
+padding: 6px 10px 6px 0;
+left: 0;
+top: 0;
+bottom: 0;
+font-weight: normal;
+color: #667e99;
+background-color: transparent;
+border-top: 1px dotted #d5e4f1;
+}
+.profile-info-row:first-child .profile-info-value {
+border-top: 0;
+}
+.profile-user-info-striped .profile-info-value {
+border-top: 1px dotted #dcebf7;
+padding-left: 12px;
+}
+.profile-info-value {
+padding: 6px 4px 6px 6px;
+margin-left: 120px;
+border-top: 1px dotted #d5e4f1;
+}
+.widget-box {
+padding: 0;
+-webkit-box-shadow: none;
+box-shadow: none;
+margin: 3px 0;
+border-bottom: 1px solid #CCC;
+}
+.widget-header {
+-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+position: relative;
+min-height: 38px;
+background: #f7f7f7;
+background-image: -webkit-gradient(linear,left 0,left 100%,from(#fff),to(#eee));
+background-image: -webkit-linear-gradient(top,#fff,0%,#eee,100%);
+background-image: -moz-linear-gradient(top,#fff 0,#eee 100%);
+background-image: linear-gradient(to bottom,#fff 0,#eee 100%);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffeeeeee',GradientType=0);
+color: #669fc7;
+border: 1px solid #CCC;
+border-bottom: 1px solid #DDD;
+padding-left: 12px;
+}
+.widget-body {
+border: 1px solid #CCC;
+border-top: 0;
+background-color: #FFF;
+}
+.widget-header>.widget-caption, .widget-header>:first-child {
+line-height: 36px;
+padding: 0;
+margin: 0;
+display: inline;
+}
+h4.smaller {
+font-size: 17px;
+}
+h3 small, .h3 small, h4 small, .h4 small {
+font-size: 14px;
+}
+.widget-main {
+padding: 12px;
+}
+.profile-user-info .span6,.profile-user-info.span6{
+	display:inline-block;width:49.8%;position:relative;height: 30px;line-height: 17px;
+}
+.span6 .profile-info-name{text-align:center;} 

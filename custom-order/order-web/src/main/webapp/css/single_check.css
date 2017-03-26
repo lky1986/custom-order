@@ -1,0 +1,168 @@
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.clearfix{*zoom:1;}
+.wrap{padding-top:20px;min-width: 1024px;position:relative;}
+
+.leftside,.rightside{
+    float:left;
+    position:relative;
+}
+.leftside{
+    z-index:10;
+}
+.inputrow+.inputrow{
+    margin-top:25px;
+}
+.inputrow:first-child{
+    margin-top:10px;
+}
+.inputrow .control-label{
+    width:100px;
+    text-align: right;
+}
+.inputrow input[type='text']{
+	width:200px;
+}
+#nowposition{
+    font-size: 100px;
+    height: 150px;
+    text-align: center;
+}
+#lastposition{
+    font-size: 35px;
+    height: 35px;
+    text-align: center;
+    color:#ccc;
+}
+.rightside{
+    padding-left:20px;
+    min-width: 630px;
+    z-index: 1;
+    width:65%;
+}
+.btn+.btn{
+    margin-left:10px;
+}
+.btn{
+
+}
+.timecount,.topbtn{
+    padding-bottom: 15px;
+}
+.timecount .inputrow,.leftinputrow{
+    margin-top:5px;
+}
+.timecount {
+    right: 0px;
+    position: absolute;
+    top: -5px;
+}
+.totalcount {
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+}
+.totalcount .control-label{
+    width:120px;
+    text-align: right;
+}
+.totalcount span{
+    margin-left: 20px;
+}
+.table_center{
+    height:376px;
+    overflow-y:hidden;
+    position:relative;
+}
+.table_center .table{
+    position:absolute;
+}
+.leftinputrow+.leftinputrow{
+    margin-top:20px;
+}
+.leftinputrow .control-label{
+    width:120px;
+    text-align: right;
+}
+.taskinfo {
+    margin-left: 125px;
+    margin-top: 5px;
+}
+.taskinfo .control-label {
+    text-align: left;
+    width: auto;
+}
+.leftinputrow textarea {
+    width: 180px;
+    height: 80px;
+}
+.singalcount input[type='text'] {
+    width: 102px;
+}
+.singalcount{
+    margin-left:115px;
+}
+.modal-in{
+    display:block;
+}
+.modal{
+    left: 50%;
+    margin-left: -400px;
+    position: absolute;
+}
+.topblock {
+    height: 40px;
+    margin-left: 330px;
+}
+#btnOperate {
+    position: absolute;
+    top: 5px;
+    left: 347px;
+}
+#btnReprint{
+    position: absolute;
+    top: 5px;
+    left: 485px;
+}
+#btnFinish{
+    position: absolute;
+    left: 90px;
+    top: 5px;
+}
+.hide{
+	display: none;
+}
+.time{
+	text-align:right;
+}
+#checkDone{
+	font-size: xx-large;
+	color: red;
+}
+.modal-header .close_modal_tab {
+    background: url("images/glyphicons-halflings-lightgray.png") -314px -2px no-repeat;
+    position: absolute;
+    right: 8px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    cursor:pointer;
+}
+.modal-header{
+    cursor: move;
+}
+#sumQty,#sumLackQty{
+    font-size: 24px;
+    font-weight: bolder;
+    color: #F00;
+}
+.label-bigfont{
+    font-size: 24px;
+    vertical-align: middle;
+}

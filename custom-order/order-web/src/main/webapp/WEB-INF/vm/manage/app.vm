@@ -1,0 +1,174 @@
+#override("header")
+<link rel="stylesheet" href="${request.contextPath}/css/perfect-scrollbar.min.css"/>
+#end
+#override("body")
+	<div class="tabWrap">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#search" data-toggle="tab">查询</a></li>
+            <li class=""><a href="#list" data-toggle="tab">列表</a></li>
+            <li class=""><a href="#content" data-toggle="tab" id="tab_content_head">内容</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <!--右边内容区域-->
+    
+            <div class="tab-pane main_wrap box active" id="search">
+                <form action="" class="form-horizontal" method="get" name="search_form">
+    
+                    <div class="control-group">
+                        <table class="edit_table">
+                            <tr>
+                                <td><label class="control-label">应用编码</label></td>
+                                <td class="textbox_ui">
+                                    <input type="text" class="span2 in_storage_num" name="appCode" >       
+                                </td>
+                            </tr>
+							<tr>
+                                <td><label class="control-label">应用名</label></td>
+                                <td class="textbox_ui">
+                                    <input type="text" class="span2 in_storage_num" name="appName" >       
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <button class="btn btn-success" type="button" id="submit_search" >查询</button>
+    								
+                                </td>
+                            </tr>
+                        </table>
+    
+    
+                            <!--<a class="help-inline">修改 hash_id</a>-->
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane main_wrap box" id="list">
+                <div class="btn-toolbar">
+    				
+                    <button class="btn btn-primary add" id="createBtn"><i class="icon_add"></i>新建</button>
+    				
+                    <button class="btn btn-primary del" id="deleteBtn"><i class="icon_del"></i>删除</button>
+    				
+                    <button class="btn btn-primary refresh" id="refreshBtn" ><i class="icon_refresh"></i>刷新</button>
+    				
+                    <!--<p id="ceshi_id">测试测试双击事件～～</p>-->
+                </div>
+                <table class="table table-bordered table-striped tb-lightgreen dataTable table-hover listTable" id="table1">
+                    <thead>
+                        <tr>
+                            <th width="20" name="id"><input name="chkAll" type="checkbox" class="checkAll chIe6"/></th>
+                            <th name="appCode">应用编码</th>
+							<th name="appName">应用名</th>
+							<th name="description">描述</th>
+                        </tr>
+                    </thead>
+                    <tbody id="search_list">
+                   
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane main_wrap box" id="content">
+    		  <form action="saveOrUpdate" name="content_form" class="form-horizontal" id="content_form">
+                <div class="btn-toolbar">
+                    <button class="btn btn-primary save" type="submit"> <i class="icon_save"></i>保存  </button>
+                </div>
+                <div class="tab-content">
+    				<div class="tab-pane active" id="base_info">
+                       <table class="edit_table">
+                          <tr>
+							 <td>
+								<label class="control-label">应用编码</label>
+                             </td>
+							 <td class="textbox_ui">	
+								<input type="text" class="span2 in_storage_num param disable" required id="appCode" name="appCode" uneditable>
+								<div class="invalid popover right">
+    								<div class="arrow"></div>
+                                    <div class="required">请输应用编码</div>
+                                    <div class="custom"></div>
+                                    <div class="format"></div>
+                                </div>
+							 </td>
+							 <td>
+								<label class="control-label ">应用名</label>
+							 </td>
+                             <td class="textbox_ui">
+								<input type="text" class="span2 in_storage_num param" required id="appName" name="appName">
+								<div class="invalid popover right">
+    								<div class="arrow"></div>
+                                    <div class="required">请输应用名</div>
+                                    <div class="custom"></div>
+                                    <div class="format"></div>
+                                </div>
+							 </td>
+                          </tr>
+						  <tr>
+							 <td>
+								<label class="control-label ">描述</label>
+							 </td>
+                             <td>
+								<input type="text" class="span2 in_storage_num param" id="description" name="description">
+                             </td>
+							 <td>
+								<label class="control-label "></label>
+                              </td>	
+							  <td>
+								
+                             </td>
+                          </tr>
+                       </table>
+                    </div>
+    			</div>
+				<input type="hidden" id="id" name="id">	
+				<input type="hidden" id="createName" name="createName">	
+    		  </form>
+			  <div id="current_user_container">
+					<table  class="table table-bordered table-striped tb-lightgreen dataTable table-hover listTable" id="current_user_table">
+                        <thead>
+                            <tr>
+                                <th width="20" name="userCode"><input name="chkAll" type="checkbox" value="1" class="checkAll chIe6"/></th>
+                                <th name="userCode">用户名</th>
+    							<th name="nickName">用户别名</th>
+                            </tr>
+                        </thead>
+                        <tbody id="search_list">
+                       
+                        </tbody>
+                    </table>
+					<button class="btn btn-success" type="button" id="open_user_list_btn">分配用户</button>
+					<button class="btn btn-success" type="button" id="delete_user_btn">删除用户</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div class="modal detail_modal " id="select_user_container" style="left:30%;width:1000px;">
+        <div class="modal-header">
+        	 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			 <h4 class="modal-title">用户</h4>
+        </div>
+         <div class="modal-body" style="height:350px;overflow:auto" id="detail_Confirm_body">
+				<table class="table table-bordered table-striped tb-lightgreen dataTable table-hover listTable" id="select_user_table">
+                    <thead>
+                        <tr>
+                            <th width="20" name="userCode"><input name="chkAll" type="checkbox" value="1" class="checkAll chIe6"/></th>
+                            <th name="userCode">用户名</th>
+							<th name="nickName">用户别名</th>
+						    
+                        </tr>
+                    </thead>
+                    <tbody id="search_list">
+                   
+                    </tbody>
+                </table>
+         </div>
+        <div class="modal-footer" style="text-align:right">
+      		  <button class="btn btn-success" type="button" id="selected_user_btn" >确定</button>
+      		  <button type="button" class="btn btn-primary close" data-dismiss="modal"  aria-hidden="true">取消</button>
+        </div>
+    </div>
+	<div class="modal-backdrop  in detail_modal" style="display:none"></div>
+#end
+#override("footer")
+<script type="text/javascript" src="${request.contextPath}/js/manage/app.js"></script>
+#end
+#extends("/layout/layout.vm")

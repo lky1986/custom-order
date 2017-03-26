@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<security:http pattern="/css/**" security="none" />
+	<security:http pattern="/js/**" security="none" />
+	<security:http pattern="/img/**" security="none" />
+	<security:http pattern="/games/**" security="none" />
+	<security:http pattern="/app/**" security="none" />
+
+	<security:http pattern="/login/**" security="none" />
+	<security:http pattern="/front/**" security="none" />
+	<security:http pattern="/waiter/register" security="none" />
+	<security:http pattern="/driver" security="none" />
+	
+	<security:http auto-config="true" entry-point-ref="customAuthorizedEntryPoint"
+		pattern="/**">
+		<security:custom-filter ref="customFilterSecurityInterceptor"
+			before="FILTER_SECURITY_INTERCEPTOR" />
+		<security:form-login login-page="${security.form.login.url}"
+			login-processing-url="${security.form.process.url}" username-parameter="username"
+			password-parameter="password" authentication-success-handler-ref="loginSuccessHandler"
+			authentication-failure-handler-ref="loginFailureHandler" />
+		<security:logout logout-url="${security.form.logout.url}"
+			success-handler-ref="logoutSuccessHandler" />
+		<security:csrf disabled="true"/>
+		<security:headers>
+			<security:frame-options policy="SAMEORIGIN"/>
+		</security:headers>
+	</security:http>
+ 
+	<security:authentication-manager alias="customAuthenticationManager">
+		<security:authentication-provider
+			user-service-ref="customUserDetailsService">
+			<security:password-encoder ref="passwordEncoder">
+				<security:salt-source user-property="username" />
+			</security:password-encoder>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<bean id="customAccessDecisionManager"
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<constructor-arg>
+			<list>
+				<ref bean="customRoleDecisionVoter" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="customSecurityMetadataSource"
+		class="com.order.security.CustomFilterInvocationSecurityMetadataSource" >
+		<property name="permissionProvider" ref="permissionProvider"></property>	
+	</bean>
+
+	<bean id="customUserDetailsService" class="com.order.security.userdetails.CustomUserDetailsService" >
+		<property name="userProvider" ref="userProvider" />
+	</bean>
+
+	<bean id="customRoleDecisionVoter" class="org.springframework.security.access.vote.RoleVoter" />
+
+	<bean id="customFilterSecurityInterceptor"
+		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<property name="authenticationManager" ref="customAuthenticationManager" />
+		<property name="accessDecisionManager" ref="customAccessDecisionManager" />
+		<property name="securityMetadataSource" ref="customSecurityMetadataSource" />
+	</bean>
+
+	<bean id="loginSuccessHandler"
+		class="com.order.security.CustomLoginSuccessHandler">
+		<property name="targetUrlParameter" value="loginSuccess"></property>
+		<property name="defaultToTagetURL">
+			<list>
+				<value>${security.form.login.target.url}</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="loginFailureHandler" class="com.order.security.CustomLoginFailureHandler" />
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+
+	<bean id="requestCache"
+		class="org.springframework.security.web.savedrequest.HttpSessionRequestCache" />
+
+	<bean id="customAuthorizedEntryPoint" class="com.order.security.web.CustomAuthorizedEntryPoint">
+		<constructor-arg index="0" value="${security.form.login.url}"/>
+	</bean>
+
+	<bean id="logoutSuccessHandler" class="com.order.security.CustomLogoutSuccessHandler" />
+
+
+</beans>

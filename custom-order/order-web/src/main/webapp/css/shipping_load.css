@@ -1,0 +1,68 @@
+.topleft {
+    display: table-cell;
+    padding-right: 10px;
+    min-width:740px;
+}
+.topright{
+    display:table-cell;
+    min-width: 700px;
+    padding-left: 20px;
+}
+.btn-right{
+    float:right;
+}
+.bottomblock {
+    padding-right: 1%;
+}
+.modal-search1{
+    width:350px;
+    margin-left: 150px;
+    margin-top: 50px;
+}
+.modal-search2 {
+    margin-top: 260px;
+    width:600px;
+}
+.modal-detail1{
+    width:860px;
+}
+.modal-detail2{
+    width:1200px;
+    height:630px;
+}
+.modal-detail1 .modal-body{
+    height:350px;
+}
+.edit_table td {
+    padding-right: 10px;
+}
+.modal-header .close_modal_tab {
+    background: url("images/glyphicons-halflings-lightgray.png") -314px -2px no-repeat;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    cursor:pointer;
+}
+.content-table{
+    margin-top:10px;
+}
+.modal-header{
+    cursor: move;
+}
+.modal-detail2 .modal-body{
+    overflow-y:auto;
+    height: 500px;
+}
+.table-wrap{
+    height:205px;
+    overflow-y:auto;
+}
+.dataTables_wrapper .bottom {
+    overflow: visible;
+    height:auto;
+}
+.dataTables_info, .dataTables_length{
+    margin:0;
+}

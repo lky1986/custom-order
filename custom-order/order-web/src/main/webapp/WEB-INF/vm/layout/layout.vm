@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.css"/>
+    <link rel="stylesheet" href="${request.contextPath}/css/global.css"/>
+    <link rel="stylesheet" href="${request.contextPath}/css/beautyform.css"/>
+    <link rel="stylesheet" href="${request.contextPath}/css/jquery-ui.css"/>
+    <link rel="stylesheet" href="${request.contextPath}/css/perfect-scrollbar.min.css"/>
+    <link rel="stylesheet" href="${request.contextPath}/css/integration.css"/>
+	<link rel="stylesheet" href="${request.contextPath}/css/widget.css"/>
+    <script type="text/javascript" src="${request.contextPath}/js/component/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/jquery-ui.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/model.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/beautyform.js"></script>
+    <script src="${request.contextPath}/js/component/jquery.jmvalidate.js" data-h5f="${request.contextPath}/js/component/H5F.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/paging.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/ColReorderWithResize.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/total.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/simple_crud_util.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/component/dragable.js"></script>
+	<script type="text/javascript">
+    var contextPath = "$request.contextPath";
+	var currentUserCode = "${authz.principal}";
+	</script>
+	#block("header") 
+       
+    #end 
+</head>
+	#block("body") 
+       base_header_context
+    #end
+	#block("footer") 
+       
+    #end
+</html>

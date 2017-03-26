@@ -1,0 +1,23 @@
+body{padding: 20px;}
+    .btn-toolbar{background: #fbfbfb;margin: 0 auto; min-width: 1000px;text-align: center;}
+    .btn-toolbar .btn-group{float: none;}
+
+    .btn-group select{margin-bottom: 2px; width: 100px;}
+    .btn-group .control-label{font-weight: normal; color: #428bca; float: left;padding-top: 4px; margin: 0;}
+    .pagenation{margin: 0 auto;width: 500px;}
+    .pagenation label{font-weight: normal; color: #428bca;}
+    .btn-group .btn{border-right: 1px solid #eaeaea;}
+    .print-review{
+        overflow: hidden;
+        color: #428bca;
+        position: relative;
+        padding-top: 15px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        outline: none;
+        -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    }
+    .print-review .close{position: absolute;right: 10px;top: 5px;}

@@ -1,0 +1,23 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+	<form action="${request.contextPath}/back/login_check" name="login_modal" class="form-horizontal" method="post">
+		<div class="pdt10 txac"><img src="${request.contextPath}/img/jukeslot_logo.png"/></div>
+		<div class="pdt100 txac">Pale Eddie's</div>
+		<div class="pdt30 txac">
+			<input type="text" name="username" class="inp_sml_login1" value="" placeholder="Email address" />		
+		</div>
+		<div class="pdt15 txac">
+			<input type="password" name="password" class="inp_sml_login2" value="" placeholder="Password" />
+		</div>
+		<div class="pdt15 txac">
+			<input type="submit" class="inp_sml_login3" value="Login" />
+		</div>
+	</form>
+#end
+#override("footer")
+  
+#end
+#extends("/layout/layoutback.vm")
