@@ -1,0 +1,298 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+<body>
+	<!--pop 当用户试图删除一个主菜单时弹出确认-->
+	<div class="pop_add">
+		<div class="tt">Attention</div>
+		<div class="ct">
+			<p class="r1 txac pdt20 pdb10">Remove this menu will delete <span class="txw1">ALL SUB MENU</span> which base on it!</p>
+			<p class="r1 txac pdb10 txs18">Are You Sure?</p>
+			<p class="txac pdb20"><a href=javascript:void(0)" class="glo-btn-g">confrim</a><a href=javascript:void(0)" class="glo-btn-r mgl40">cancel</a></p>
+				
+		</div>
+	</div>
+	<div class="pop_windows"></div>
+	<!--pop end-->
+	<div class="right_wrap">
+		<div class="cm_process">
+			<img src="${request.contextPath}/img/cm_process03.png" />
+		</div>
+		<div style="position: absolute;margin-left: 450px;">
+			<p>Image position:</p>
+			<p><img src="${request.contextPath}/img/pic_menupos02.png" /></p>
+		</div>
+		<div class="tips_ct mgt20" style="width: 420px;">
+			<p class="g1 pdb05">Upload Suggest：<span class="g3">176 x 176px , fomat as JPG,PNG, File size ≤ 150KB.</span></p>
+			<p class="r2">You can add at most 8 menu objects.</p>
+			<p class="r2">If you don't have a picture,you can use background color instead.</p>
+			<p class="r2">This menu will base on Left Menu.</p>
+		</div>
+		<div class="pdt30">
+			<p class="txs16 pdb05">
+				<span>Menu Type:</span>
+				<select class="inp_sml_nolenth inp-ws2">
+					<option>Food Menu</option>
+					<option>Salad</option>
+					<option>Dessert</option>
+				</select>
+			</p>
+		</div>
+				
+		<div class="pdt30 mainmenu_cp">
+			<p class="txs16 pdb05">Menu1:</p>
+			<div class="upload_box clearfix">
+				<div class="ctnr_img type03 dfl"></div><!--上传后图片放在这个容器里，显示规格已经约束-->
+				<div class="dfl pdl20 txs12">
+					<p><input type="text" class="inp_sml_nolenth inp-ws2" placeholder="Menu Name" /></p>					
+					<div class="pdt15 clearfix" style="position: relative;" >
+						<input type="checkbox" class="dfl" />
+						<span class="dfl pdl05">Use Background Color:</span>
+						<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a><!--此处应显示取色器当前颜色-->						
+						<div id="picker" class="pop_picker"></div><!--取色器，点击上面的a触发显示-->						
+					</div>
+					<div class="pdt08 pdb10 pdr10"><a href=javascript:void(0)" class="glo-btn-b">Upload</a><a href=javascript:void(0)" class="r2 mgl10">Remove Menu</a></div><!--点击Remove Menu将删除此菜单及其下的sub menu数据-->
+				</div>
+				<div class="dfl pdl40 txs12">
+					<label class="dfl">
+						<input type="checkbox" checked="checked" class="dfl" /><!--此行勾选即显示sub menu编辑-->
+						<span class="dfl pdl05">Add Sub Menu</span>
+					</label>
+					<div class="dfl pdl40">
+						<p>
+						<label class="dfl">
+							<input type="radio" class="dfl" />
+							<span class="dfl pdl05">Modifiers</span>
+						</label>
+						</p>
+						<p>
+						<label class="dfl">
+							<input type="radio" class="dfl" />
+							<span class="dfl pdl05">No Modifiers</span>
+						</label>
+						</p>
+					</div>
+					<label class="dfl mgl40">
+						<input type="checkbox" class="dfl" />
+						<span class="dfl pdl05">Build Your Own</span>
+					</label>					
+				</div>
+			</div>
+			<!--sub menu-->
+			<div class="sub_menu_ct clearfix">
+				<p class="pdb05 txs14">
+					<span>Sub Menu:</span>
+					<span class="g1 pdl10">Upload Suggest：</span>
+					<span>200 x 150px , fomat as JPG,PNG, File size ≤ 150KB.</span>
+					<span class="r2">You can add at most 8 menu objects.</span>
+				</p>
+				
+				<div class="cp">
+					<div class="ctnr_img type04"></div>
+					<div class="clearfix">
+						<div class="pdt05 pdb05 clearfix" style="position: relative;" >
+							<input type="checkbox" class="dfl" />
+							<span class="dfl pdl05 txs12">Use BgColor:</span>
+							<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a><!--此处应显示取色器当前颜色-->						
+							<div id="picker" class="pop_picker"></div><!--取色器，点击上面的a触发显示-->						
+						</div>
+					</div>
+					<div><input type="text" class="inp_sml_nolenth inp-ctm142" placeholder="Menu Name" /></div>
+					<a href=javascript:void(0)" class="btn_up02 mgt10">Upload</a>
+					<a href=javascript:void(0)" class="r2 txac">Remove Menu</a>
+				</div>
+				
+				<div class="cp">
+					<div class="ctnr_img type04"></div>
+					<div class="clearfix">
+						<div class="pdt05 pdb05 clearfix" style="position: relative;" >
+							<input type="checkbox" class="dfl" />
+							<span class="dfl pdl05 txs12">Use BgColor:</span>
+							<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a><!--此处应显示取色器当前颜色-->						
+							<div id="picker" class="pop_picker"></div><!--取色器，点击上面的a触发显示-->						
+						</div>
+					</div>
+					<div><input type="text" class="inp_sml_nolenth inp-ctm142" placeholder="Menu Name" /></div>
+					<a href=javascript:void(0)" class="btn_up02 mgt10">Upload</a>
+					<a href=javascript:void(0)" class="r2 txac">Remove Menu</a>
+				</div>
+				
+				<div class="cp">
+					<div class="ctnr_img type04"></div>
+					<div class="clearfix">
+						<div class="pdt05 pdb05 clearfix" style="position: relative;" >
+							<input type="checkbox" class="dfl" />
+							<span class="dfl pdl05 txs12">Use BgColor:</span>
+							<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a><!--此处应显示取色器当前颜色-->						
+							<div id="picker" class="pop_picker"></div><!--取色器，点击上面的a触发显示-->						
+						</div>
+					</div>
+					<div><input type="text" class="inp_sml_nolenth inp-ctm142" placeholder="Menu Name" /></div>
+					<a href=javascript:void(0)" class="btn_up02 mgt10">Upload</a>
+					<a href=javascript:void(0)" class="r2 txac">Remove Menu</a>
+				</div>
+				
+				<div class="cp">
+					<div class="ctnr_img type04"></div>
+					<div class="clearfix">
+						<div class="pdt05 pdb05 clearfix" style="position: relative;" >
+							<input type="checkbox" class="dfl" />
+							<span class="dfl pdl05 txs12">Use BgColor:</span>
+							<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a><!--此处应显示取色器当前颜色-->						
+							<div id="picker" class="pop_picker"></div><!--取色器，点击上面的a触发显示-->						
+						</div>
+					</div>
+					<div><input type="text" class="inp_sml_nolenth inp-ctm142" placeholder="Menu Name" /></div>
+					<a href=javascript:void(0)" class="btn_up02 mgt10">Upload</a>
+					<a href=javascript:void(0)" class="r2 txac">Remove Menu</a>
+				</div>
+				
+				<div class="cp">
+					<div class="ctnr_img type04"></div>
+					<div class="clearfix">
+						<div class="pdt05 pdb05 clearfix" style="position: relative;" >
+							<input type="checkbox" class="dfl" />
+							<span class="dfl pdl05 txs12">Use BgColor:</span>
+							<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a><!--此处应显示取色器当前颜色-->						
+							<div id="picker" class="pop_picker"></div><!--取色器，点击上面的a触发显示-->						
+						</div>
+					</div>
+					<div><input type="text" class="inp_sml_nolenth inp-ctm142" placeholder="Menu Name" /></div>
+					<a href=javascript:void(0)" class="btn_up02 mgt10">Upload</a>
+					<a href=javascript:void(0)" class="r2 txac">Remove Menu</a>
+				</div>
+				
+				<div class="cpadd"></div>
+				
+			</div>
+			<!--sub menu END-->
+		</div>
+		
+		<div class="pdt30 mainmenu_cp">
+			<p class="txs16 pdb05">Menu2:</p>
+			<div class="upload_box clearfix">
+				<div class="ctnr_img type03 dfl"></div><!--上传后图片放在这个容器里，显示规格已经约束-->
+				<div class="dfl pdl20 txs12">
+					<p><input type="text" class="inp_sml_nolenth inp-ws2" placeholder="Menu Name" /></p>					
+					<div class="pdt15 clearfix" style="position: relative;" >
+						<input type="checkbox" class="dfl" />
+						<span class="dfl pdl05">Use Background Color:</span>
+						<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a><!--此处应显示取色器当前颜色-->						
+						<div id="picker" class="pop_picker"></div><!--取色器，点击上面的a触发显示-->						
+					</div>
+					<div class="pdt08 pdb10 pdr10"><a href=javascript:void(0)" class="glo-btn-b">Upload</a><a href=javascript:void(0)" class="r2 mgl10">Remove Menu</a></div><!--点击Remove Menu将删除此菜单及其下的sub menu数据-->
+				</div>
+				<div class="dfl pdl40 txs12">
+					<label class="dfl">
+						<input type="checkbox" class="dfl" /><!--此行勾选即显示sub menu编辑-->
+						<span class="dfl pdl05">Add Sub Menu</span>
+					</label>
+					<div class="dfl pdl40">
+						<p>
+						<label class="dfl">
+							<input type="radio" class="dfl" />
+							<span class="dfl pdl05">Modifiers</span>
+						</label>
+						</p>
+						<p>
+						<label class="dfl">
+							<input type="radio" class="dfl" />
+							<span class="dfl pdl05">No Modifiers</span>
+						</label>
+						</p>
+					</div>
+					<label class="dfl mgl40">
+						<input type="checkbox" class="dfl" />
+						<span class="dfl pdl05">Build Your Own</span>
+					</label>					
+				</div>
+			</div>
+			<!--sub menu-->
+			<div class="sub_menu_ct clearfix" style="display: none;">
+				<p class="pdb05 txs14">
+					<span>Sub Menu:</span>
+					<span class="g1 pdl10">Upload Suggest：</span>
+					<span>200 x 150px , fomat as JPG,PNG, File size ≤ 150KB.</span>
+					<span class="r2">You can add at most 8 menu objects.</span>
+				</p>
+					
+				<div class="cpadd"></div>
+				
+			</div>
+			<!--sub menu END-->
+		</div>
+		
+		<div class="pdt30 mainmenu_cp">
+			<p class="txs16 pdb05">Menu3:</p>
+			<div class="upload_box clearfix">
+				<div class="ctnr_img type03 dfl"></div><!--上传后图片放在这个容器里，显示规格已经约束-->
+				<div class="dfl pdl20 txs12">
+					<p><input type="text" class="inp_sml_nolenth inp-ws2" placeholder="Menu Name" /></p>					
+					<div class="pdt15 clearfix" style="position: relative;" >
+						<input type="checkbox" class="dfl" />
+						<span class="dfl pdl05">Use Background Color:</span>
+						<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a><!--此处应显示取色器当前颜色-->						
+						<div id="picker" class="pop_picker"></div><!--取色器，点击上面的a触发显示-->						
+					</div>
+					<div class="pdt08 pdb10 pdr10"><a href=javascript:void(0)" class="glo-btn-b">Upload</a><a href=javascript:void(0)" class="r2 mgl10">Remove Menu</a></div><!--点击Remove Menu将删除此菜单及其下的sub menu数据-->
+				</div>
+				<div class="dfl pdl40 txs12">
+					<label class="dfl">
+						<input type="checkbox" class="dfl" /><!--此行勾选即显示sub menu编辑-->
+						<span class="dfl pdl05">Add Sub Menu</span>
+					</label>
+					<div class="dfl pdl40">
+						<p>
+						<label class="dfl">
+							<input type="radio" class="dfl" />
+							<span class="dfl pdl05">Modifiers</span>
+						</label>
+						</p>
+						<p>
+						<label class="dfl">
+							<input type="radio" class="dfl" />
+							<span class="dfl pdl05">No Modifiers</span>
+						</label>
+						</p>
+					</div>
+					<label class="dfl mgl40">
+						<input type="checkbox" class="dfl" />
+						<span class="dfl pdl05">Build Your Own</span>
+					</label>					
+				</div>
+			</div>
+			<!--sub menu-->
+			<div class="sub_menu_ct clearfix" style="display: none;">
+				<p class="pdb05 txs14">
+					<span>Sub Menu:</span>
+					<span class="g1 pdl10">Upload Suggest：</span>
+					<span>200 x 150px , fomat as JPG,PNG, File size ≤ 150KB.</span>
+					<span class="r2">You can add at most 8 menu objects.</span>
+				</p>
+					
+				<div class="cpadd"></div>
+				
+			</div>
+			<!--sub menu END-->
+		</div>
+		
+		<div class="mgt30"><a href=javascript:void(0)"><img src="${request.contextPath}/img/btn_addmenu2.png" /></a></div>
+		
+		
+		<div>
+			<form method="post">
+			<input type="submit" class="btn_next" value="Save and Next"/>
+			</form>
+		</div>
+	</div>
+</body>
+#end
+#override("footer")
+<script type="text/javascript">
+	
+	
+</script>
+#end
+#extends("/layout/layoutback.vm")

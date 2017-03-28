@@ -1,0 +1,72 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+<body>
+	<div class="right_wrap">
+		<div class="cm_process">
+			<img src="${request.contextPath}/img/cm_process02.png" />
+		</div>
+
+		<div class="pdt20 clearfix">
+			<div style="position: absolute;margin-left: 450px;">
+				<p>Menu position:</p>
+				<p><img src="${request.contextPath}/img/pic_menupos01.png" /></p>
+			</div>
+			<div class="tips_ct" style="width: 420px;">
+				<p class="r2">You can add at most 8 menu objects</p>
+				<p class="r2">Main Menu will base on this menu.</p>
+			</div>
+			
+			
+		</div>
+		
+		<div class="pdt20">
+			<p class="txs16 pdb05 clearfix">
+				<span class="dfl">Left Menu Background Color:</span>
+				<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a>
+			</p>
+		</div>		
+		
+		<div class="pdt20">
+			<p class="pdb10">
+				<span>menu 1:</span>
+				<input type="text" class="inp_sml_nolenth inp-ws2" />
+				<a href=javascript:void(0)"  class="r2 txs12 pdl10">Remove Menu</a>
+			</p>
+			<p class="pdb10">
+				<span>menu 2:</span>
+				<input type="text" class="inp_sml_nolenth inp-ws2" />
+				<a href=javascript:void(0)"  class="r2 txs12 pdl10">Remove Menu</a>
+			</p>
+			<p class="pdb10">
+				<span>menu 3:</span>
+				<input type="text" class="inp_sml_nolenth inp-ws2" />
+				<a href=javascript:void(0)"  class="r2 txs12 pdl10">Remove Menu</a>
+			</p>
+			<p class="pdb10">
+				<span>menu 4:</span>
+				<input type="text" class="inp_sml_nolenth inp-ws2" />
+				<a href=javascript:void(0)"  class="r2 txs12 pdl10">Remove Menu</a>
+			</p>
+			<p class=""><a href=javascript:void(0)"><img src="${request.contextPath}/img/btn_addmenu.png" /></a></p>
+
+		</div>
+		
+		<div>
+			<form method="post">
+			<input type="submit" class="btn_next" value="Save and Next"/>
+			</form>
+		</div>
+		
+	</div>
+</body>
+#end
+#override("footer")
+<script type="text/javascript">
+	
+	
+</script>
+#end
+#extends("/layout/layoutback.vm")

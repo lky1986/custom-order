@@ -11,7 +11,7 @@ import com.nl.security.web.auth.IRole;
 import com.nl.security.web.auth.IUser;
 
 
-public class User extends BaseDomain implements IUser,Serializable {
+public class User extends BaseDomain implements IUser,Serializable,Cloneable {
 
 	/**
 	 * 
