@@ -18,7 +18,7 @@ import com.nl.common.util.web.HttpUtils;
 import com.nl.common.web.vo.ResponseResult;
 
 
-public class JWMSHandlerExceptionResolver implements HandlerExceptionResolver {
+public class CustomHandlerExceptionResolver implements HandlerExceptionResolver {
 	
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
