@@ -51,7 +51,7 @@
 
 	<bean id="authzImpl" class="com.order.security.web.tag.CustomAuthzImpl" />
 	
-	<bean id="exceptionResolver" class="com.order.mvc.handler.JWMSHandlerExceptionResolver" />
+	<bean id="exceptionResolver" class="com.order.mvc.handler.CustomHandlerExceptionResolver" />
 	
 	
 	<bean class="com.order.web.swagger.SwaggerConfiguration"/>
