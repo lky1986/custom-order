@@ -1,0 +1,119 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+<body>
+	<div class="right_wrap">
+		<div class="cm_process">
+			<img src="${request.contextPath}/img/cm_process01.png" />
+		</div>
+		<div class="pdt30">
+			<p class="txs16 pdb05">Merchant Logo:</p>
+			<div class="upload_box clearfix">
+				<div class="ctnr_img type01 dfl"></div><!--上传后图片放在这个容器里，显示规格已经约束-->
+				<div class="dfl pdl20 txs12">
+					<p class="g1 pdb05">Upload Suggest：</p>
+					<p>247 x 164px , fomat as JPG,PNG<br/>File size ≤ 100KB.</p>
+					<p class="pdt10 pdb10"><a href=javascript:void(0)" class="glo-btn-b">Upload</a></p>
+					<div class="" style="position: relative;" >
+						<span class="dfl">Logo Background Color:</span>
+						<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a><!--此处应显示取色器当前颜色-->
+						
+						<div id="picker" class="pop_picker"></div><!--取色器，点击上面的a触发显示-->
+						
+					</div>
+				</div>
+				<div class="dfl pdl100 txs12">
+					<div class="clearfix">
+						<div class="dfl g1">Payment Checkout :</div>
+						<div class="dfl">
+							<p><label><input type="radio" class="dfl" />Quick Service Checkout</label></p>
+							<p><label><input type="radio" class="dfl" />Open Tab Checkout</label></p>
+						</div>
+					</div>
+					<div class="clearfix pdt10">
+						<div class="dfl g1 pdl25">Payment Type :</div>
+						<div class="dfl">
+							<p><label><input type="radio" class="dfl" />Cash and Credit</label></p>
+							<p><label><input type="radio" class="dfl" />Credit Only</label></p>
+						</div>
+					</div>
+					<div class="clearfix pdt10">
+						<div class="dfl g1 pdt06" style="padding-left: 54px;">Tax Rate :</div>
+						<div class="dfl">
+							<p><input type="text" class="inp_sml_nolenth inp-wss" />&nbsp;%</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="pdt20">
+			<p class="txs16 pdb05">Main Picture:</p>
+			<div class="tips_ct" style="width: 420px;">
+				<p class="g1 pdb05">Upload Suggest：<span class="g3">775 x 553px , fomat as JPG,PNG, File size ≤ 500KB.</span></p>
+				<p class="r2">You can add at most 5 pictures.</p>
+			</div>
+			<div class="main_adv clearfix">
+				<div class="cp">
+					<a href=javascript:void(0)" class="btn_remove_img" style="display: block;"></a><!--上传了图片才显示这个按钮-->
+					<div class="ctnr_img type02"></div>
+					<a href=javascript:void(0)" class="btn_up01 mgt10">Upload</a>
+				</div>
+				<div class="cp">
+					<a href=javascript:void(0)" class="btn_remove_img" style="display: none;"></a>
+					<div class="ctnr_img type02"></div>
+					<a href=javascript:void(0)" class="btn_up01 mgt10">Upload</a>
+				</div>
+				<div class="cp">
+					<a href=javascript:void(0)" class="btn_remove_img" style="display: none;"></a>
+					<div class="ctnr_img type02"></div>
+					<a href=javascript:void(0)" class="btn_up01 mgt10">Upload</a>
+				</div>
+				<div class="cp">
+					<a href=javascript:void(0)" class="btn_remove_img" style="display: none;"></a>
+					<div class="ctnr_img type02"></div>
+					<a href=javascript:void(0)" class="btn_up01 mgt10">Upload</a>
+				</div>
+				<div class="cp">
+					<a href=javascript:void(0)" class="btn_remove_img" style="display: none;"></a>
+					<div class="ctnr_img type02"></div>
+					<a href=javascript:void(0)" class="btn_up01 mgt10">Upload</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="pdt20">
+			<p class="txs16 pdb05 clearfix">
+				<span class="dfl">Main Background Color:</span>
+				<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a>
+			</p>
+		</div>
+		<div class="pdt20">
+			<p class="txs16 pdb05 clearfix">
+				<span class="dfl">Main Trim Color:</span>
+				<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a>
+			</p>
+		</div>
+		<div class="pdt20">
+			<p class="txs16 pdb05 clearfix">
+				<span class="dfl">Button Color:</span>
+				<a href=javascript:void(0)" class="color_picker" style="background-color: ;"></a>
+			</p>
+		</div>
+		<div>
+			<form method="post">
+			<input type="submit" class="btn_next" value="Save and Next"/>
+			</form>
+		</div>
+	</div>
+</body>
+#end
+#override("footer")
+<script type="text/javascript">
+	
+	
+</script>
+#end
+#extends("/layout/layoutback.vm")

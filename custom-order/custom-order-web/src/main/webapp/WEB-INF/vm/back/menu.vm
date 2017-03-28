@@ -5,7 +5,7 @@
 #override("body")
 	<div class="menu_head">
 		<span class="dfl white1 pdl20">${time}</span>
-		<a href="${request.contextPath}/logout" class="dfr white1 pdr20">Logout</a>
+		<a href="${request.contextPath}/back/logout" class="dfr white1 pdr20">Logout</a>
 		<span class="white1 txw1 txs22">Main Menu</span>
 	</div>
 	<div class="clearfix pdl20 pdr20 pdt10">

@@ -1,0 +1,386 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+<body>
+	<div class="right_wrap">
+		<div class="cm_process">
+			<img src="${request.contextPath}/img/cm_process04.png" />
+		</div>
+		<div style="position: absolute;margin-left: 700px;">
+			<p>Image position:</p>
+			<p><img src="${request.contextPath}/img/pic_menupos03.png" /></p>
+		</div>
+		
+		<div class="pdt30">
+			<p class="txs16 pdb05">
+				<span>Menu:</span>
+				<select class="inp_sml_nolenth inp-ws2">
+					<option>Food Menu</option>
+					<option>Salad</option>
+					<option>Dessert</option>
+				</select>
+				<select class="inp_sml_nolenth inp-ws2">
+					<option>Sandwich</option>
+					<option>Berg</option>
+					<option>卤肉卷</option>
+				</select>
+				<select class="inp_sml_nolenth inp-ws2">
+					<option>Hot</option>
+					<option>Cold</option>
+					<option>Axed</option>
+				</select>
+			</p>
+		</div>
+				
+		<div class="tips_ct mgt10" style="width: 420px;">
+			<p class="g1">Upload Suggest：<span class="g3">256 x 220px , fomat as JPG,PNG , File size ≤ 200KB.</span></p>
+		</div>
+		
+		<!--这TM就是一个Item单元-->
+		<div class="item_cp upload_box clearfix mgt20 mgb40">
+			<div class="dfl">
+				<div class="ctnr_img type05"></div><!--上传后图片放在这个容器里，显示规格已经约束-->
+				<p class="pdt10 pdb10 dfl"><a href=javascript:void(0)" class="glo-btn-b txac" style="width: 147px;">Upload</a></p>
+			</div>
+			<div class="dfl pdl20 txs12">
+				<p><input type="text" class="inp_sml_nolenth inp-ws2" placeholder="Item Name" /></p>
+				<div class="pdt10" style="position: relative;">
+					
+					<!--打折pop 没点击时是隐藏的-->
+					<div class="discount_pop" style="display: block;">
+						<div class="cutline1 pdt07 pdb07 pdl10 txs14">Set Discount</div>
+						<dl class="form_tab2">
+							<dt>Start Time:</dt>
+							<dd>
+								<label class="dfl clearfix pdt05 mgr15">
+									<input type="radio" class="dfl" checked="checked" />
+									<span class="dfl">Now</span>
+								</label>
+								<label class="dfl clearfix pdt05 pdr05">
+									<input type="radio" class="dfl" />
+									<span class="dfl">At</span>
+								</label>
+								<input type="text" class="inp_sml_nolenth inp-ws" placeholder="Select time" />
+							</dd>
+						</dl>
+						<dl class="form_tab2">
+							<dt>End Time:</dt>
+							<dd><input type="text" class="inp_sml_nolenth " placeholder="Select time" /></dd>
+						</dl>
+						<dl class="form_tab2">
+							<dt>Sale Price:</dt>
+							<dd><input type="text" class="inp_sml_nolenth " placeholder="Price($)" /></dd>
+						</dl>
+						<dl class="form_tab2">
+							<dt>&nbsp;</dt>
+							<dd><a href=javascript:void(0)" class="glo-btn-b">Submit</a><a href=javascript:void(0)" class="glo-btn-r mgl15">cancel</a></dd>
+						</dl>
+					</div>					
+					<!--打折pop end-->
+					
+					<input type="text" class="inp_sml_nolenth inp-ws2" placeholder="Price($)" />
+					<a href=javascript:void(0)" class="glo-btn-g2 mgl10">Discounts</a>
+				</div>
+				
+				<div class="pdt20">Remove Ingredients:</div>
+				<div class="remove_midifiers clearfix">
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cpadd"></div>
+				</div>
+				
+				<div class="pdt10">Add Ingredients:</div>
+				<div class="add_midifiers clearfix">			
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img" style="right:-10px"></a>
+						<input type="text" class="inper1" placeholder="Ingredients" />
+						<span>|</span>
+						<input type="text" class="inper2" placeholder="Price($)" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img" style="right:-10px"></a>
+						<input type="text" class="inper1" placeholder="Ingredients" />
+						<span>|</span>
+						<input type="text" class="inper2" placeholder="Price($)" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img" style="right:-10px"></a>
+						<input type="text" class="inper1" placeholder="Ingredients" />
+						<span>|</span>
+						<input type="text" class="inper2" placeholder="Price($)" />
+					</div>
+					<div class="cpadd"></div>
+				</div>
+				
+				<div class="pdt30">Tell Me More:</div>
+				<div class="clearfix">
+					<div class="element_cp">
+						<p class="g1 txlh10">Element 1</p>
+						<p><input type="text" class="inper" /></p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 1&nbsp;</span>
+							<input type="text" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 2&nbsp;</span>
+							<input type="text" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06 g1">Option 3&nbsp;<input type="checkbox" class="dfl" /></span>
+							<input type="text" readonly="readonly" />
+						</p>
+					</div>
+					<div class="element_cp">
+						<p class="g1 txlh10">Element 2</p>
+						<p><input type="text" class="inper" /></p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 1&nbsp;</span>
+							<input type="text" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 2&nbsp;</span>
+							<input type="text" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 3&nbsp;<input type="checkbox" checked="checked" class="dfl" /></span>
+							<input type="text" />
+						</p>
+					</div>
+					<div class="element_cp">
+						<p class="g1 txlh10">
+							<label class="dfr clearfix" style="margin-bottom: 0;">
+								<input type="checkbox" class="dfl" />
+								<span class="dfl">Enable</span>
+							</label>
+							<span>Element 3</span>
+						</p>
+						<p><input type="text" class="inper" readonly="readonly" /></p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 1&nbsp;</span>
+							<input type="text" readonly="readonly" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 2&nbsp;</span>
+							<input type="text" readonly="readonly" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06 g1">Option 3&nbsp;<input type="checkbox" class="dfl" /></span>
+							<input type="text" readonly="readonly" />
+						</p>
+					</div>
+				</div>
+				
+				<div class="pdt30">Description:</div>
+				<div><textarea class="description_ar"></textarea></div>
+				
+			</div>	
+		</div>
+		<!--这TM就是一个Item单元 END-->
+		
+		<!--这TM就是一个Item单元-->
+		<div class="item_cp upload_box clearfix mgt20 mgb40">
+			<div class="dfl">
+				<div class="ctnr_img type05"></div><!--上传后图片放在这个容器里，显示规格已经约束-->
+				<p class="pdt10 pdb10 dfl"><a href=javascript:void(0)" class="glo-btn-b txac" style="width: 147px;">Upload</a></p>
+			</div>
+			<div class="dfl pdl20 txs12">
+				<p><input type="text" class="inp_sml_nolenth inp-ws2" placeholder="Item Name" /></p>
+				<div class="pdt10" style="position: relative;">
+					
+					<!--打折pop-->
+					<div class="discount_pop" style="display: none;">
+						<div class="cutline1 pdt07 pdb07 pdl10 txs14">Set Discount</div>
+						<dl class="form_tab2">
+							<dt>Start Time:</dt>
+							<dd>
+								<label class="dfl clearfix pdt05 mgr15">
+									<input type="radio" class="dfl" checked="checked" />
+									<span class="dfl">Now</span>
+								</label>
+								<label class="dfl clearfix pdt05 pdr05">
+									<input type="radio" class="dfl" />
+									<span class="dfl">At</span>
+								</label>
+								<input type="text" class="inp_sml_nolenth inp-ws" placeholder="Select time" />
+							</dd>
+						</dl>
+						<dl class="form_tab2">
+							<dt>End Time:</dt>
+							<dd><input type="text" class="inp_sml_nolenth " placeholder="Select time" /></dd>
+						</dl>
+						<dl class="form_tab2">
+							<dt>Sale Price:</dt>
+							<dd><input type="text" class="inp_sml_nolenth " placeholder="Price($)" /></dd>
+						</dl>
+						<dl class="form_tab2">
+							<dt>&nbsp;</dt>
+							<dd><a href=javascript:void(0)" class="glo-btn-b">Submit</a><a href=javascript:void(0)" class="glo-btn-r mgl15">cancel</a></dd>
+						</dl>
+					</div>					
+					<!--打折pop end-->
+					
+					<input type="text" class="inp_sml_nolenth inp-ws2" placeholder="Price($)" />
+					<a href=javascript:void(0)" class="glo-btn-g2 mgl10">Discounts</a>
+				</div>
+				
+				<div class="pdt20">Remove Ingredients:</div>
+				<div class="remove_midifiers clearfix">
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img"></a>
+						<input type="text" class="inper" placeholder="Ingredients" />
+					</div>
+					<div class="cpadd"></div>
+				</div>
+				
+				<div class="pdt10">Add Ingredients:</div>
+				<div class="add_midifiers clearfix">			
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img" style="right:-10px"></a>
+						<input type="text" class="inper1" placeholder="Ingredients" />
+						<span>|</span>
+						<input type="text" class="inper2" placeholder="Price($)" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img" style="right:-10px"></a>
+						<input type="text" class="inper1" placeholder="Ingredients" />
+						<span>|</span>
+						<input type="text" class="inper2" placeholder="Price($)" />
+					</div>
+					<div class="cp">
+						<a href=javascript:void(0)" class="btn_remove_img" style="right:-10px"></a>
+						<input type="text" class="inper1" placeholder="Ingredients" />
+						<span>|</span>
+						<input type="text" class="inper2" placeholder="Price($)" />
+					</div>
+					<div class="cpadd"></div>
+				</div>
+				
+				<div class="pdt30">Tell Me More:</div>
+				<div class="clearfix">
+					<div class="element_cp">
+						<p class="g1 txlh10">Element 1</p>
+						<p><input type="text" class="inper" /></p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 1&nbsp;</span>
+							<input type="text" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 2&nbsp;</span>
+							<input type="text" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06 g1">Option 3&nbsp;<input type="checkbox" class="dfl" /></span>
+							<input type="text" readonly="readonly" />
+						</p>
+					</div>
+					<div class="element_cp">
+						<p class="g1 txlh10">Element 2</p>
+						<p><input type="text" class="inper" /></p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 1&nbsp;</span>
+							<input type="text" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 2&nbsp;</span>
+							<input type="text" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 3&nbsp;<input type="checkbox" checked="checked" class="dfl" /></span>
+							<input type="text" />
+						</p>
+					</div>
+					<div class="element_cp">
+						<p class="g1 txlh10">
+							<label class="dfr clearfix" style="margin-bottom: 0;">
+								<input type="checkbox" class="dfl" />
+								<span class="dfl">Enable</span>
+							</label>
+							<span>Element 3</span>
+						</p>
+						<p><input type="text" class="inper" readonly="readonly" /></p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 1&nbsp;</span>
+							<input type="text" readonly="readonly" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06">Option 2&nbsp;</span>
+							<input type="text" readonly="readonly" />
+						</p>
+						<p class="clearfix ele_box pdt10">
+							<span class="dfl pdt06 g1">Option 3&nbsp;<input type="checkbox" class="dfl" /></span>
+							<input type="text" readonly="readonly" />
+						</p>
+					</div>
+				</div>
+				
+				<div class="pdt30">Description:</div>
+				<div><textarea class="description_ar"></textarea></div>
+				
+			</div>	
+		</div>
+		<!--这TM就是一个Item单元 END-->
+		
+		
+		
+		<div class="mgt30"><a href=javascript:void(0)"><img src="${request.contextPath}/img/btn_addmenu3.png" /></a></div>
+		
+		
+		<div>
+			<form method="post">
+			<input type="submit" class="btn_next" value="Save and Next"/>
+			</form>
+		</div> 
+	</div>
+</body>
+#end
+#override("footer")
+<script type="text/javascript">
+	
+	
+</script>
+#end
+#extends("/layout/layoutback.vm")

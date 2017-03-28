@@ -32,7 +32,7 @@
 		        	<a href="javascript:void(0);"  name="/back/main/password/changePassword"><i class="icon_modify"></i>change password</a>
 		        </li>
 		      	<li>
-		      		<a href="${request.contextPath}/logout" class="exit"><i class="icon_logout"></i>Logout</a>
+		      		<a href="${request.contextPath}/back/logout" class="exit"><i class="icon_logout"></i>Logout</a>
 		      	</li>
 		    </ul>
 	    
@@ -77,7 +77,7 @@
 			                        </a>
 		                       </li>
 		                       <li>
-			                       	<a  class="menu03" href="javascript:void(0);" name="/back/menu" >
+			                       	<a  class="menu03" href="javascript:void(0);" name="/back/custom_menu/home_page" >
 			                            	Customize Menu
 			                        </a>
 		                       </li>
