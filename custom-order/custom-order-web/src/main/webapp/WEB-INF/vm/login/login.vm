@@ -1,11 +1,12 @@
 #set($layout="layout/layoutback.vm" )
 #override("header")
-<title>JukeSlotBackend</title>
+<title>Beef O Bradys</title>
 #end
 #override("body")
-	<form action="${request.contextPath}/back/login_check" name="login_modal" class="form-horizontal" method="post">
+	<form action="login_check" name="login_modal" class="form-horizontal" method="post">
 		<div class="pdt10 txac"><img src="${request.contextPath}/img/jukeslot_logo.png"/></div>
-		<div class="pdt100 txac">Pale Eddie's</div>
+		<div class="pdt100 txac"><img src="${request.contextPath}/img/BeefObradyLOGO.png" width="243" height="67"/></div>
+		#if($!session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION")) <div class="pdt30 txac"> $session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION").message</div>#end 
 		<div class="pdt30 txac">
 			<input type="text" name="username" class="inp_sml_login1" value="" placeholder="Email address" />		
 		</div>

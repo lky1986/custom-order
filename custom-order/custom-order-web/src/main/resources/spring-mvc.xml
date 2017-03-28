@@ -49,7 +49,7 @@
 		</property>
 	</bean>
 
-	<bean id="authzImpl" class="com.order.security.web.tag.CustomAuthzImpl" />
+	<bean id="authzImpl" class="com.nl.security.web.tag.CustomAuthzImpl" />
 	
 	<bean id="exceptionResolver" class="com.order.mvc.handler.CustomHandlerExceptionResolver" />
 	

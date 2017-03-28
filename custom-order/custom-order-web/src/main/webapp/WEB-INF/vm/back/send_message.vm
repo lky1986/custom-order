@@ -1,0 +1,99 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+<body onload="load()">
+	<div class="right_wrap">		
+
+		<div class="txs18 txw1 pdb20">Send Message</div>
+		
+		<div class="hyper_textarea">
+			<textarea class="msg_ar" id="messageContent"></textarea>
+		</div>
+		<div class="pdt20">
+			<span>Select Waiter</span>
+			<select class="inp_sml_nolenth inp-ws2" id="waiterList">
+			</select>
+		</div>
+		<div class="pdt20"><a href="#" class="glo-btn-g" id="saveMessage">Save</a><a href="#" class="glo-btn-b mgl10" id="pushMessage">Send</a></div>
+		
+	</div>
+</body>
+#end
+#override("footer")
+<script type="text/javascript">
+	function load(){
+		$.extend({
+			BACK:{
+				saveMessage:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/message/saveOrUpdate",
+							success:function(data){
+								
+							},
+							param:par
+						}
+					);
+				},
+				getMessage:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/message/detail",
+							success:function(data){
+								if(data.result.entity){
+									$("#messageContent").val(data.result.entity.content);
+								}
+								
+							},
+							param:par
+						}
+					);
+				},
+				pushMessage:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/messagePush/push",
+							success:function(data){
+								
+							},
+							param:par
+						}
+					);
+				},
+				getWaiterList:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/waiter/all/active/list",
+							success:function(data){
+								var waiterList = data.result.rows;
+								var waiterSelect = $("#waiterList");
+								var st="";
+								for(index in waiterList){
+									st+="<option value='"+waiterList[index].id+"'>"+waiterList[index].userCode+"</option>"
+								}
+								waiterSelect.append(st);
+							},
+							param:par
+						}
+					);
+				}
+			}
+		});
+		$.BACK.getWaiterList();
+		$.BACK.getMessage();
+		$("#saveMessage").click(function(){
+			var tx = $("#messageContent").val();
+			var par = {"content":tx};
+			$.BACK.saveMessage(par);
+		});
+		$("#pushMessage").click(function(){
+			var waiterId = $("#waiterList").val();
+			var par = {"userId":waiterId};
+			$.BACK.pushMessage(par);
+		});
+	}
+</script>
+#end
+#extends("/layout/layoutback.vm")

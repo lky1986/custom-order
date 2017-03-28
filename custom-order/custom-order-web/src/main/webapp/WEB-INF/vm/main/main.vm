@@ -7,8 +7,8 @@
 #override("body")
 
 	<div class="top">
-	    <a id="logo" href="$request.contextPath/">
-	        Pale Eddie's
+	    <a id="logo" href="$request.contextPath/" style="background-image: url(${request.contextPath}/css/images/BeefObradyLOGO.png);">
+	        Beef O Bradys
 	    </a>
 	    <a class="hidden-xs open" id="main-menu-toggle">
 	        <span class="align-justify"></span>
@@ -26,13 +26,13 @@
 	                <a class="close_all_tabs"><i class="icon_close_all"></i>close all tab</a>
 	            </li>
 		      	<li>
-		        	<a href="javascript:void(0);"  name="/main/user/changeUserInfo"><i class="icon_modify"></i>change userinfo</a>
+		        	<a href="javascript:void(0);"  name="/back/main/user/changeUserInfo"><i class="icon_modify"></i>change userinfo</a>
 		        </li>
 				<li>
-		        	<a href="javascript:void(0);"  name="/main/password/changePassword"><i class="icon_modify"></i>change password</a>
+		        	<a href="javascript:void(0);"  name="/back/main/password/changePassword"><i class="icon_modify"></i>change password</a>
 		        </li>
 		      	<li>
-		      		<a href="${request.contextPath}/back/logout" class="exit"><i class="icon_logout"></i>Logout</a>
+		      		<a href="${request.contextPath}/logout" class="exit"><i class="icon_logout"></i>Logout</a>
 		      	</li>
 		    </ul>
 	    
@@ -47,8 +47,8 @@
 	                    <h4 class="panel-title" >
 	                     	<ul class="nav nav-list">
 		                       <li>
-			                       	<a class="menu01" href="javascript:void(0);" name="/back/user/index" >
-			                            	User
+			                       	<a class="menu01" href="javascript:void(0);" name="/back/activity" >
+			                            	Activity
 			                        </a>
 		                       </li>
 		                       <li>
@@ -74,6 +74,31 @@
 		                       <li>
 			                       	<a class="menu03" href="javascript:void(0);" name="/back/game_sales" >
 			                            	Game Sales
+			                        </a>
+		                       </li>
+		                       <li>
+			                       	<a  class="menu03" href="javascript:void(0);" name="/back/menu" >
+			                            	Customize Menu
+			                        </a>
+		                       </li>
+		                       <li>
+			                       	<a  class="menu04" href="javascript:void(0);" name="/back/device_manage" >
+			                            	Device Management
+			                        </a>
+		                       </li>
+		                       <li>
+			                       	<a  class="menu05" href="javascript:void(0);" name="/back/user_manage" >
+			                            	User Management
+			                        </a>
+		                       </li>
+		                       <li>
+			                       	<a  class="menu06" href="javascript:void(0);" name="/back/floor_edit" >
+			                            	Waiter & Device
+			                        </a>
+		                       </li>
+		                       <li>
+			                       	<a  class="menu07" href="javascript:void(0);" name="/back/send_message" >
+			                            	Send Message
 			                        </a>
 		                       </li>
 	                       </ul>

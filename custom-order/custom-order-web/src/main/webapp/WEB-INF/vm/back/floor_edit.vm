@@ -1,0 +1,702 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+<body onload="load()">
+	<div class="fl_main">
+			<div class="fl_top clearfix">
+				<div class="dfl pdt13 pdr30 pdl20"><img src="../img/jukelogo2.png" /></div>
+				<a href="javascript:void(0);" class="titleBtn" id="viewTipes"><img src="../img/fl_btn01.png" /></a>
+				<a href="javascript:void(0);" class="titleBtn on" id="viewSales"><img src="../img/fl_btn02.png" /></a>
+				<a href="javascript:void(0);" class="titleBtn" id="managerWaiter"><img src="../img/fl_btn03.png" /></a>
+			</div>
+			<table class="fl_frame" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="147" class="txvt txal pdl10">
+						<div class="data_fliter">
+							<div class="w1">Enter Table#</div>
+							<div class="pdb30"><input type="text" class="inp-wth1" id="enterTableText" readonly="true"/></div>
+							<div class="w1 pdb10">Time Date</div>
+							<div>
+								<p>
+									<label class="clearfix">
+										<input type="radio" name="totalDate" class="dfl totalDate" value="Daily" checked="true"/>
+										<span class="dfl w1 pdl05">Daily</span>
+									</label>
+								</p>
+								<p>
+									<label class="clearfix">
+										<input type="radio" name="totalDate" class="dfl" value="Weekly"/>
+										<span class="dfl w1 pdl05">Weekly</span>
+									</label>
+								</p>
+								<p>
+									<label class="clearfix">
+										<input type="radio" class="dfl" name="totalDate" value="Custom"/><span class=" w1 pdl05">Select Time</span><br/>										
+										<input type="text" class="inp-wth2 dfl" placeholder="Start Time" id="totalStartTime"/><br/>
+										<input type="text" class="inp-wth2 dfl mgt03" placeholder="End Time" id="totalEndTime"/>
+									</label>
+								</p>
+								<p >
+									<a href="javascript:void(0);" class="glo-btn-g" id="searchDesk">Submit</a>
+								</p>
+								<div class="w1 pdt40 tip_pop_panel" style="display:none" id="showWaiterTips">
+									<p class="">Current Waiter：</p>
+									<p class="o1 txw1 selectUserName"></p>
+									<p class="pdt10">Total Tips:</p>
+									<p class="txs18 txw1 o1" id="selectUserTip"></p>									
+								</div>
+							</div>
+						</div>
+					</td>
+					<!--当前-->
+					<div class="waiter_select tip_pop_panel" style="left:180px; top: 52px;display:none;" id="currentWaiterPanel">
+						<a href="javascript:void(0);" class="glo-btn-w mgt03" id="changeWaiterBtn">Change Waiter</a><!--当waiter列表展开时，此按钮增加调用on样式	-->
+						<span class="w1">Waiter:</span>
+						<span class="o1 selectUserName" ></span>
+					</div>
+					<!--当前 end-->
+					<!--列表-->
+					<div class="pop_select_wt tip_pop_panel" style="left:180px; top: 90px;display:none;" id="selectWaiterPanel">
+						<div class="tt"><a href="javascript:void(0);" class="dfr tip_panel_close"><img src="../img/fl_btn_close.png" /></a>Select Waiters</div>
+						<div class="ct pdl20 pdr20 pdt10 pdb20 clearfix" id="selectWaiterList">
+						</div>
+					</div>
+					<td class="stage">
+						<div class="stgct">
+						<div class="stg_ct" >
+							<div class="hint" ><img src="../img/map_icons.png"/></div>
+							
+							<div class="ct_tabbtns"  style="left: 319px; top:705px" ><!---控制style属性来定位,整个tab按钮含信息气泡只需要用这个控制位置-->
+								<!--界面内桌子的按钮---->
+								<a href="javascript:void(0);" class="tag_btn">#21</a>
+								<!--界面内桌子的按钮 end-->
+								<!--弹窗1 View Sale-->
+								<div id="popSale" class="pop_sale" style="display: none;"><!--这个是view sale显示的气泡，改变display属性来控制显示或隐藏-->
+									<div class="arr01"><img src="../img/arr_pop01.png" /></div>
+									<div class="salett clearfix">
+										<a href="javascript:void(0);" class="btn_ed deviceEdit">EDIT</a>
+										<img src="../img/fl_ic_dvc.png" class="dfl" />
+										<span class="dfl w1 pdl10 txs16" id="driverInfo"></span>
+									</div>
+									<div class="pdl10 pdr10 pdt10 pdb10" id="saleInfo">
+										<p class="clearfix">
+											<img src="../img/fl_ic_sale.png" class="dfl pdt04" />
+											<span class="dfl pdl10 txs18 txw1" id="totalSaleInfo">$122.00</span>
+										</p>
+										<p class="pdl25">$90.20<span class="g1">(#23)</span></p>
+										<p class="pdl25">$31.80<span class="g1">(#24)</span></p>
+									</div>
+									<div class="waiter_infos clearfix" id="waiterInfo">
+										<!--waiter信息模块-->
+										<div class="waiter_tl g3">
+											<div class="arr02"><img src="../img/arr_pop02.png" /></div>
+											<p class="pdb12">ID:9527</p>
+											<p class="black1">Assigned Tables</p>
+											<p class="pdb12">1033 1034 1038</p>
+											<p class="black1">Tips Total</p>
+											<p>$60.30 (Daily)</p>
+											<p>$1230.00 (Weekly)</p>
+										</div>
+										<!--waiter信息模块 end-->
+										<img src="../img/fl_ic_waiter.png" class="dfl pdt02" />
+										<span class="dfl pdl10 txs16">Samasha Groves</span>
+									</div>
+								</div>
+								<!--弹窗1 View Sale end-->
+								<!--弹窗1-1 View tips-->
+								<div class="pop_sale" style="display: none;z-index:1000"><!--这个是view tips显示的气泡，改变display属性来控制显示或隐藏，和sales的气泡是相同的位置-->
+									<div class="arr01"><img src="../img/arr_pop01.png" /></div>
+									<div class="salett clearfix">
+										<a href="javascript:void(0);" class="btn_ed">EDIT</a>
+										<img src="../img/fl_ic_dvc.png" class="dfl" />
+										<span class="dfl w1 pdl10 txs16">#23,#24</span>
+									</div>
+									<div class="pdl10 pdr10 pdt10 pdb10">
+										<p class="clearfix">
+											<img src="../img/fl_ic_tips.png" class="dfl pdt04" />
+											<span class="dfl pdl10 txs18 txw1">$122.00</span>
+										</p>
+										<p class="pdl25">$90.20<span class="g1">(#23)</span></p>
+										<p class="pdl25">$31.80<span class="g1">(#24)</span></p>
+									</div>
+									<div class="waiter_infos clearfix">
+										<!--waiter信息模块-->
+										<div class="waiter_tl g3">
+											<div class="arr02"><img src="../img/arr_pop02.png" /></div>
+											<p class="pdb12">ID:9527</p>
+											<p class="black1">Assigned Tables</p>
+											<p class="pdb12">1033 1034 1038</p>
+											<p class="black1">Tips Total</p>
+											<p>$60.30 (Daily)</p>
+											<p>$1230.00 (Weekly)</p>
+										</div>
+										<!--waiter信息模块 end-->
+										<img src="../img/fl_ic_waiter.png" class="dfl pdt02" />
+										<span class="dfl pdl10 txs16">Samasha Groves</span>
+									</div>
+								</div>
+								<!--弹窗1-1 View tips end-->
+							</div>
+							
+							<div class="ct_tabbtns"  style="left: 319px; top:622px" >
+								<a href="javascript:void(0);" class="tag_btn">#22</a>
+								<!--弹窗1 和  弹窗1-1 插入在这里-->
+							</div>
+							
+							<div class="ct_tabbtns"  style="left: 319px; top:538px" >
+								<a href="javascript:void(0);" class="tag_btn">#23</a>
+							</div>
+							
+							<div class="ct_tabbtns"  style="left: 319px; top:450px"  >
+								<a href="javascript:void(0);" class="tag_btn">#24</a>
+							</div>
+							
+							<div class="ct_tabbtns"  style="left: 319px; top:367px" >
+								<a href="javascript:void(0);" class="tag_btn">#25</a>
+							</div>
+							
+							<div class="ct_tabbtns"  style="left: 319px; top:172px" >
+								<a href="javascript:void(0);" class="tag_btn">#31</a>
+							</div>
+							
+							<div class="ct_tabbtns"  style="left: 319px; top:88px" >
+								<a href="javascript:void(0);" class="tag_btn">#32</a>
+							</div>
+							<div class="ct_tabbtns"  style="left: 430px; top:80px" >
+								<a href="javascript:void(0);" class="tag_btn">#41</a>
+							</div>
+							<div class="ct_tabbtns"  style="left: 517px; top:80px" >
+								<a href="javascript:void(0);" class="tag_btn">#42</a>
+							</div>
+							<div class="ct_tabbtns"  style="left: 602px; top:80px" >
+								<a href="javascript:void(0);" class="tag_btn">#43</a>
+							</div>							
+							<div class="ct_tabbtns"  style="left: 688px; top:80px" >
+								<a href="javascript:void(0);" class="tag_btn">#44</a>
+							</div>
+							
+							<div class="ct_tabbtns"  style="left: 551px; top:576px" >
+								<a href="javascript:void(0);" class="tag_btn">#51</a>
+							</div>
+							<div class="ct_tabbtns"  style="left: 551px; top:449px" >
+								<a href="javascript:void(0);" class="tag_btn">#52</a>
+							</div>
+							<div class="ct_tabbtns"  style="left: 669px; top:576px" >
+								<a href="javascript:void(0);" class="tag_btn">#53</a>
+							</div>							
+							<div class="ct_tabbtns"  style="left: 669px; top:449px" >
+								<a href="javascript:void(0);" class="tag_btn">#54</a>
+							</div>
+							
+							<div class="ct_tabbtns"  style="left: 688px; top:207px" >
+								<a href="javascript:void(0);" class="tag_btn">#61</a>
+							</div>
+							<div class="ct_tabbtns"  style="left: 589px; top:207px" >
+								<a href="javascript:void(0);" class="tag_btn">#62</a>
+							</div>
+							<div class="ct_tabbtns"  style="left: 490px; top:207px" >
+								<a href="javascript:void(0);" class="tag_btn">#63</a>
+							</div>							
+							<div class="ct_tabbtns"  style="left: 688px; top:307px" >
+								<a href="javascript:void(0);" class="tag_btn">#64</a>
+							</div>
+							<div class="ct_tabbtns"  style="left: 490px; top:307px" >
+								<a href="javascript:void(0);" class="tag_btn">#65</a>
+							</div>
+							
+							<div class="ct_tabbtns"  style="left: 832px; top:130px" >
+								<a href="javascript:void(0);" class="tag_btn">#101</a>
+							</div>
+														
+							
+							<!--弹窗2 Device-->
+							<div class="pop_device pop_panel" style="left:200px; top: 20px;display:none;" id="deviceLinkPanel">
+								<div class="tt"><a href="javascript:void(0);" class="dfr panel_close"><img src="../img/fl_btn_close.png" /></a>Device Link</div>
+								<div class="ct pdl20 pdr20 pdt20 pdb20">
+									<div class="txs20 tabTitle">Tab 1033</div>
+									<div class="txs14 g2">Current Link:</div>
+									<div class="clearfix pdt10">
+										<input type="text" class="inp_sml_nolenth inp-ws2 dfl mgr10 mgb10 device" placeholder="Empty" />
+										<input type="text" class="inp_sml_nolenth inp-ws2 dfl mgr10 mgb10 device" placeholder="Empty" />
+										<input type="text" class="inp_sml_nolenth inp-ws2 dfl mgr10 mgb10 device" placeholder="Empty" />
+										<input type="text" class="inp_sml_nolenth inp-ws2 dfl mgr10 mgb10 device" placeholder="Empty" />
+									</div>
+									<div><a href="javascript:void(0);" class="glo-btn-g confrim">Confirm</a><a href="javascript:void(0);" class="glo-btn-r mgl10 panel_close">cancel</a></div>
+								</div>
+							</div>
+							<!--弹窗2 Device end-->
+							
+							
+							<!--弹窗3 edit-->
+							<div class="pop_edit pop_panel" style="left:50px; top: 50px;display:none" id="managerWaitersPanel">
+								<div class="tt"><a href="javascript:void(0);" class="dfr panel_close"><img src="../img/fl_btn_close.png" /></a>Edit Waiters</div>
+								<div class="ct">
+									<table class="waiter_list">
+										<tr>
+											<th width="170">Name</th>
+											<th width="100">ID</th>
+											<th width="150">Work Time</th>
+											<th>Assigned Table</th>
+											<th width="70">&nbsp;</th>
+										</tr>
+									</table>									
+									<div class="pages2 pdt10 pdb10 txal clearfix">
+											
+									</div>		
+								</div>
+							</div>
+							<!--弹窗3 edit end-->							
+							<!--弹窗4 assign-->
+							<div class="pop_assign pop_panel" style="left:100px; top: 350px;display:none" id="assignmentPanel">
+								<div class="tt"><a href="javascript:void(0);" class="dfr panel_close"><img src="../img/fl_btn_close.png" /></a>Assignment</div>
+								<div class="ct">
+									<div class="form_tab">
+										<dl>
+											<dt>Name</dt>
+											<dd>
+												<select class="inp_sml_nolenth inp-ws2" id="allWaiterList">
+													
+												</select>
+											</dd>
+										</dl>
+										<dl>
+											<dt>Assign Time</dt>
+											<dd>
+												<input type="text" class="inp_sml_nolenth inp-ws2" id="startTime"/>
+												<input type="text" class="inp_sml_nolenth inp-ws2" id="endTime"/>
+											</dd>
+										</dl>
+										<dl>
+											<dt>Assign Table #</dt>
+											<dd>
+												<select class="inp_sml_nolenth inp-ws2" id="allDeskList">
+													
+												</select>
+											</dd>
+										</dl>
+										<dl>
+											<dt>&nbsp;</dt>
+											<dd><a href="javascript:void(0);" class="glo-btn-g confrim">Confirm</a><a href="javascript:void(0);" class="glo-btn-r mgl10 panel_close">cancel</a></dd>
+										</dl>
+									</div>
+									
+								</div>
+							</div>
+							<!--弹窗4 edit end-->
+						</div>
+						</div>
+					</td>
+					
+				</tr>
+			</table>
+		</div>
+</body>
+#end
+#override("footer")
+<script type="text/javascript">
+	 function formatPrice (num)
+    {
+            num = num.toString().replace(/\$|\,/g,'');  
+		    if(isNaN(num))  
+		    num = "0";  
+		    sign = (num == (num = Math.abs(num)));  
+		    num = Math.floor(num*100+0.50000000001);  
+		    cents = num%100;  
+		    num = Math.floor(num/100).toString();  
+		    if(cents<10)  
+		    cents = "0" + cents;  
+		    for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)  
+		    num = num.substring(0,num.length-(4*i+3))+','+  
+		    num.substring(num.length-(4*i+3));  
+		    return (((sign)?'':'-') + num + '.' + cents);  
+    }  
+	function load(){
+		$.extend({
+			BACK:{
+				getDesk:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/desk/detail",
+							success:function(data){
+								var popSale = $("#popSale");
+								var deskBtn;
+								if(data.result.desk){
+									var desk = data.result.desk;
+									$(".tag_btn").each(function(index,object){
+										if($(this).text()==desk.num){
+											deskBtn = $(this);
+										}
+									});
+									deskBtn.parent(".ct_tabbtns").append(popSale);
+									
+									var driverInfo = popSale.find("#driverInfo");
+									driverInfo.empty();
+									var saleInfo = popSale.find("#saleInfo");
+									saleInfo.empty();
+									if(data.result.desk.driverList){
+										var driverList = data.result.desk.driverList;
+										var driverContext="";
+										var saleContext="";
+										saleContext+="<p class='clearfix'>";
+										saleContext+="<img src='../img/fl_ic_sale.png' class='dfl pdt04' />";
+										saleContext+="<span class='dfl pdl10 txs18 txw1' id='totalSaleInfo'>$"+formatPrice(data.result.desk.saleTotal)+"</span>";
+										saleContext+="</p>";
+										for(index in driverList){
+											if(index>0)driverContext+=",";
+											driverContext+=driverList[index].num;
+											saleContext+="<p class='pdl25'>$"+formatPrice(driverList[index].saleTotal)+"<span class='g1'>("+driverList[index].num+")</span></p>";
+										}
+										driverInfo.append(driverContext);
+										saleInfo.append(saleContext);
+									}
+									var waiterInfo = popSale.find("#waiterInfo");
+									waiterInfo.empty();
+									if(data.result.desk.waiterList){
+										var waiterList = data.result.desk.waiterList;
+										var waiterContext="";
+										for(index in waiterList){
+											var waiter = waiterList[index];
+											waiterContext +="<div class='waiter_tl g3'>";
+											waiterContext +="<div class='arr02'><img src='../img/arr_pop02.png' /></div>";
+											waiterContext +="<p class='pdb12'>ID:"+waiter.id+"</p>";
+											waiterContext +="<p class='black1'>Assigned Tables</p>";
+											waiterContext +="<p class='pdb12'>";
+											if(waiter.deskWaiterRelationList){
+												for(i in waiter.deskWaiterRelationList){
+													if(i>0)waiterContext+=",";
+													waiterContext+=waiter.deskWaiterRelationList[i].deskNum;
+												}
+											}
+											waiterContext +="</p>";
+											waiterContext +="<p class='black1'>Tips Total</p>";
+											waiterContext +="<p>$"+formatPrice(waiter.dailyTip)+" (Daily)</p>";
+											waiterContext +="<p>$"+formatPrice(waiter.weekyTip)+" (Weekly)</p>";
+											waiterContext +="</div>";
+											waiterContext +="<img src='../img/fl_ic_waiter.png' class='dfl pdt02' />";
+											waiterContext +="<span class='dfl pdl10 txs16'>"+waiter.userCode+"</span>";
+										}
+										waiterInfo.append(waiterContext);
+									}
+									popSale.show();
+									popSale.data(data.result.desk);
+								}
+							},
+							error:function(data){
+								alert(data.message);
+							},
+							param:par
+						}
+					);
+				},
+				bindDeviceList:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/desk/driver/bind",
+							success:function(data){
+								$("#deviceLinkPanel").hide();
+							},
+							error:function(data){
+								alert(data.message);
+							},
+							param:par
+						}
+					);
+				},
+				manageWaiterList:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/waiter/active/list",
+							success:function(data){
+								var result = data.result.rows;
+								var manageWaiterList = $(".waiter_list");
+								manageWaiterList.find(".waiterItem").remove();
+								var dataList = result.dataList;
+								var content="";
+								for(index in dataList){
+									var data = dataList[index];
+									var deskWaiterRelationList =data.deskWaiterRelationList
+									content+="<tr class='waiterItem' waiterId='"+data.id+"'>";
+									content+="<td class='txs16'>"+data.userCode+"</td>";
+									content+="<td class='txs16'>"+data.id+"</td>";
+									if(deskWaiterRelationList.length>0){
+										var table = "";
+										content+="<td>";
+										for(ind in deskWaiterRelationList){
+											content+="<p class='pdb05 pdt05'>";
+											var deskWaiterRelation =deskWaiterRelationList[ind];
+											var startTime = new Date();
+											startTime.setTime(deskWaiterRelation.startTime);
+											var endTime = new Date();
+											endTime.setTime(deskWaiterRelation.endTime);
+											content+=startTime.format('yyyy-MM-dd HH:mm')+"<br/>-"+endTime.format('yyyy-MM-dd HH:mm');
+											content+="</p>";
+											if(table.indexOf(deskWaiterRelation.deskNum)<0){
+												if(table.length>0)table+=",";
+												table+=deskWaiterRelation.deskNum;
+											}
+										}
+										content+="</td>";
+										content+="<td>"+table+"</td>";
+									}else{
+										content+="<td></td>";
+										content+="<td></td>";
+									}
+									content+="<td><a href='javascript:void(0);' class='btn_ed02 assignmentWaiter'>EDIT</a></td>";
+									manageWaiterList.append(content);
+									content="";
+									manageWaiterList.find(".manageWaiterItem[waiterId='"+data.id+"']").data(data);
+								}
+								total= result.total;
+								pageSize =result.pageSize;
+								var page = $.createPage(result.page,result.pageNum);
+								$(".pages2").empty();
+								$(".pages2").append(page);
+							},
+							param:par
+						}
+					);
+				},
+				allWaiterList:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/waiter/all/active/list",
+							success:function(data){
+								var allWaiterList = $("#allWaiterList");
+								var waiterId = $("#assignmentPanel").attr("waiterId");
+								allWaiterList.empty();
+								var content = "";
+								var waiterList = data.result.rows;
+								if(waiterList){
+									var content = ""; 
+									for(var index in waiterList){
+										var waiter = waiterList[index];
+										if(waiterId==waiter.id){
+											content+="<option value='"+waiter.id+"' selected=true>"+waiter.userCode+"</option>"
+										}else{
+											content+="<option value='"+waiter.id+"'>"+waiter.userCode+"</option>"
+										}
+									}
+									allWaiterList.append(content); 
+								}
+							},
+							param:par
+						}
+					);
+				},
+				allDeskList:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/desk/listJson",
+							success:function(data){
+								var allDeskList = $("#allDeskList");
+								allDeskList.empty();
+								var deskList = data.result.rows;
+								if(deskList){
+									var content = ""; 
+									for(var index in deskList){
+										var desk = deskList[index];
+										content+="<option value='"+desk.id+"'>"+desk.num+"</option>"
+									}
+									allDeskList.append(content);
+								}
+							},
+							param:par
+						}
+					);
+				},
+				assignWaiter:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/waiter/assign",
+							success:function(data){
+								$("#assignmentPanel").hide();
+								$.BACK.manageWaiterList();
+							},
+							error:function(data){
+								alert(data.message);
+							},
+							param:par
+						}
+					);
+				},
+				selectWaiterList:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/waiter/all/active/list",
+							success:function(data){
+								var list = "";
+								var rows=data.result.rows;
+								for(var index in rows){
+									var user=rows[index];
+									list+="<label class='clearfix oflp'>";
+									list+="<input type='radio' class='dfl selectUser' name='selectUser' value='"+user.id+"' username='"+user.userCode+"'/>";
+									list+="<span class='pdl03' title='读取完整姓名'>"+user.userCode+"</span>";
+									list+="</label>";
+								}
+								$("#selectWaiterList").empty();
+								$("#selectWaiterList").append(list);
+								
+							},
+							error:function(data){
+								alert(data.message);
+							},
+							param:par
+						}
+					);
+				},
+				getCurrentWaiterTips:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/desk/waiter/tips",
+							success:function(data){
+								$("#selectUserTip").text("$"+data.result.tip);
+							},
+							error:function(data){
+								alert(data.message);
+							},
+							param:par
+						}
+					);
+				}
+			}
+		});
+		$(".panel_close").click(function(){
+			$(this).parents(".pop_panel").hide();
+		});
+		$(".tip_panel_close").click(function(){
+			$("#selectWaiterPanel").hide();
+		})
+		////device manager
+		$("#popSale").on("click",".deviceEdit",function(){
+			var deviceLinkPanel = $("#deviceLinkPanel");
+			deviceLinkPanel.show();
+			var devices = deviceLinkPanel.find(".device");
+			var desk = $("#popSale").data();
+			var driverList = desk.driverList;
+			deviceLinkPanel.find(".tabTitle").text("Tab "+desk.num);
+			devices.each(function(index,obj){
+				if(driverList[index]){
+					$(this).val(driverList[index].num);
+				}else{
+					$(this).val("");
+				}
+			});
+			deviceLinkPanel.data(desk);
+		});
+		$("#deviceLinkPanel .confrim").click(function(){
+			var deviceLinkPanel = $("#deviceLinkPanel")
+			var devices = deviceLinkPanel.find(".device");
+			var devs =[];
+			devices.each(function(index,obj){
+				if($(this).val()!="")devs[devs.length]=$(this).val();
+			})
+			var param = {};
+			param["deskNum"]=deviceLinkPanel.data().num;
+			param["driverNum"]=devs;
+			$.BACK.bindDeviceList(param);
+		});
+		//watier manager
+		var currentPage=1;
+		var total;
+		var pageSize;
+		$("#managerWaitersPanel").on("click",".assignmentWaiter",function(){
+			$("#assignmentPanel").show();
+			$("#assignmentPanel").attr("waiterId",$(this).parents(".waiterItem").attr("waiterId"));
+			$.BACK.allWaiterList();
+			$.BACK.allDeskList();
+		});
+		$(".pages2").on("click",".noton",function(){
+			var par = {};
+			currentPage=$(this).text();
+			par["page"]=currentPage;
+			$('.searchParam').each(function(){
+				var id = $(this).attr("id");
+				par[id] =$(this).val();
+			});
+			$.BACK.manageWaiterList(par);
+		});
+		
+		$('#startTime').datetimepicker();
+		$('#endTime').datetimepicker();
+		$("#assignmentPanel").find(".confrim").click(function(){
+			var startTime = $("#startTime").val();
+			var endTime =$("#endTime").val();
+			var param = {};
+			param["startTime"]=startTime;
+			param["endTime"]=endTime;
+			param["userId"]=$("#allWaiterList").val();
+			param["deskId"]=$("#allDeskList").val();
+			$.BACK.assignWaiter(param);
+		});
+		
+		$("#totalStartTime").datetimepicker({baseZ:1000});
+		$("#totalEndTime").datetimepicker();
+		$(".tag_btn").click(function(){
+			$("#enterTableText").val($(this).text());
+		});
+		$("#searchDesk").click(function(){
+			var dataForm = $(".data_fliter");
+			var deskNum = $("#enterTableText").val();
+			var dateType = dataForm.find("input[name='totalDate']:checked").val();
+			var param = {};
+			param["deskNum"]=deskNum;
+			param["dateType"]=dateType;
+			if(dateType=="Custom"){
+				param["startTime"]=$("#totalStartTime").val();
+				param["endTime"]=$("#totalEndTime").val();
+			}
+			$(".pop_sale,.pop_panel").each(function(index,object){
+				$(this).hide();
+			})
+			
+			if($(".titleBtn.on").eq(0).attr("id")=="viewTipes"){
+				var userId = $(".selectUserName").eq(0).attr("userId");
+				if(userId){
+					param["userId"]=userId;
+					$.BACK.getCurrentWaiterTips(param);
+				}
+			}else{
+				$.BACK.getDesk(param);
+			}
+			
+		});
+		
+		$(".titleBtn").click(function(){
+			var currentBtnId=$(this).attr("id");
+			$(".titleBtn").each(function(index,object){
+				var btn = $(this);
+				if(btn.attr("id")==currentBtnId){
+					if(!btn.hasClass("on"))btn.addClass("on");
+				}else{
+					btn.removeClass("on");
+				}
+			});
+			$(".pop_panel,.tip_pop_panel").hide();
+			if(currentBtnId=="managerWaiter"){
+				$("#managerWaitersPanel").show();
+				$.BACK.manageWaiterList();
+			}else if(currentBtnId=="viewTipes"){
+				$("#selectWaiterPanel").show();
+				$("#currentWaiterPanel").show();
+				$("#showWaiterTips").show();
+				$.BACK.selectWaiterList();
+			}else{
+				
+			}
+		});
+		$("#selectWaiterList").on("click",".selectUser",function(){
+			$(".selectUserName").text($(this).attr("username"));
+			$(".selectUserName").attr("userId",$(this).val());
+			$("#selectWaiterPanel").hide();
+		});
+		$("#changeWaiterBtn").click(function(){
+			$("#selectWaiterPanel").show();
+			
+		});
+	}
+	
+</script>
+#end
+#extends("/layout/layoutback.vm")

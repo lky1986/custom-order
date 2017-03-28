@@ -1,0 +1,210 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+<body onload="load()">
+	<div class="right_wrap">		
+
+		<div class="txs18 txw1">Verify List</div>
+		<div class="main_part pdt20">
+			<table class="std_tab device_tab">
+				<thead>
+					<tr>
+						<td class="txs16" width="250">Name</td>
+						<td class="txs16" width="250">Phone Number</td>
+						<td class="txs16">&nbsp;</td>
+					</tr>
+				</thead>
+				<tbody id="waiterList">
+					
+				</tbody>						
+			</table>		
+		</div>
+		
+		<div class="txs18 txw1 pdt40">User List</div>
+		<div class="selecter">
+			
+			<span class="txs16">Select Time&nbsp;&nbsp;</span>
+			<input type="text" class="inp_sml_nolenth inp-ws2 searchParam" id="startTime"/>
+			<span class="pdl10 pdr10">to</span>
+			<input type="text" class="inp_sml_nolenth inp-ws2 searchParam" id="endTime"/>
+			<a href="javascript:void(0);" class="searchBtn"><img src="../img/btn_ser.png" /></a>
+		</div>
+		<div class="main_part pdt20">
+			<table class="std_tab assign_tab">
+				<thead>
+					<tr>
+						<td class="txs16" width="250">Name</td>
+						<td class="txs16" width="100">ID</td>
+						<td class="txs16" width="200">Assigned Time</td>
+						<td class="txs16">Assigned Table #</td>
+
+					</tr>
+				</thead>
+				<tbody id="manageWaiterList">
+										
+				</tbody>					
+			</table>
+			<div class="pages pdt20 txal clearfix">
+					
+			</div>			
+		</div>
+		
+		
+	</div>
+</body>
+#end
+#override("footer")
+<script type="text/javascript">
+	function load(){
+		initTime();
+		$.extend({
+			BACK:{
+				getWaiterList:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/waiter/all/list",
+							success:function(data){
+								var result = data.result.rows;
+								var waiterList = $("#waiterList");
+								waiterList.empty();
+								var dataList = result;
+								var content="";
+								for(index in dataList){
+									var data = dataList[index];
+									content+="<tr class='waiterItem' waiterId='"+data.id+"'>";
+									content+="<th class='txs16'>"+data.userCode+"</th>";
+									content+="<th class='txs16'>"+data.phone+"</th>";
+									content+="<td class='txs16'>";
+									content+="<a href='javascript:void(0);' class='glo-btn-r approveWaiter'>approve</a>";
+									content+="<a href='javascript:void(0);' class='glo-btn-r mgl10 delWaiter'>Denial</a>";
+									content+="</td>";
+									content+="</tr>";
+									waiterList.append(content);
+									content="";
+									waiterList.find(".waiterItem[waiterId='"+data.id+"']").data(data);
+								}
+							},
+							param:par
+						}
+					);
+				},
+				accept:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/waiter/accept",
+							success:function(data){
+								$.BACK.getWaiterList();
+								$.BACK.manageWaiterList();
+							},
+							param:par
+						}
+					);
+				},
+				refuse:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/waiter/refuse",
+							success:function(data){
+								$.BACK.getWaiterList();
+							},
+							param:par
+						}
+					);
+				},
+				manageWaiterList:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/waiter/active/list",
+							success:function(data){
+								var result = data.result.rows;
+								var manageWaiterList = $("#manageWaiterList");
+								manageWaiterList.empty();
+								var dataList = result.dataList;
+								var content="";
+								for(index in dataList){
+									var data = dataList[index];
+									var deskWaiterRelationList =data.deskWaiterRelationList
+									content+="<tr class='manageWaiterItem' waiterId='"+data.id+"'>";
+									content+="<th class='txs16'>"+data.userCode+"</th>";
+									content+="<th class='txs16'>"+data.id+"</th>";
+									if(deskWaiterRelationList.length>0){
+										var table = "";
+										content+="<td>";
+										for(ind in deskWaiterRelationList){
+											content+="<p class='pdb05 pdt05'>";
+											var deskWaiterRelation =deskWaiterRelationList[ind];
+											var startTime = new Date();
+											startTime.setTime(deskWaiterRelation.startTime);
+											var endTime = new Date();
+											endTime.setTime(deskWaiterRelation.endTime);
+											content+=startTime.format('yyyy-MM-dd HH:mm')+"<br/>-"+endTime.format('yyyy-MM-dd HH:mm');
+											content+="</p>";
+											if(table.indexOf(deskWaiterRelation.deskNum)<0){
+												if(table.length>0)table+=",";
+												table+=deskWaiterRelation.deskNum;
+											}
+										}
+										content+="</td>";
+										content+="<td>"+table+"</td>";
+									}else{
+										content+="<td></td>";
+										content+="<td></td>";
+									}
+									manageWaiterList.append(content);
+									content="";
+									manageWaiterList.find(".manageWaiterItem[waiterId='"+data.id+"']").data(data);
+								}
+								total= result.total;
+								pageSize =result.pageSize;
+								var page = $.createPage(result.page,result.pageNum);
+								$(".pages").empty();
+								$(".pages").append(page);
+							},
+							param:par
+						}
+					);
+				}
+			}
+		});
+		$("#waiterList").on("click",".approveWaiter",function(){
+			var data= $(this).parents(".waiterItem").data();
+			var par={"id":data.id};
+			$.BACK.accept(par);
+		});
+		$("#waiterList").on("click",".delWaiter",function(){
+			var data= $(this).parents(".waiterItem").data();
+			var par={"id":data.id};
+			$.BACK.refuse(par);
+		});
+		var currentPage=1;
+		var total;
+		var pageSize;
+		$(".pages").on("click",".noton",function(){
+			var par = {};
+			currentPage=$(this).text();
+			par["page"]=currentPage;
+			$('.searchParam').each(function(){
+				var id = $(this).attr("id");
+				par[id] =$(this).val();
+			});
+			$.BACK.manageWaiterList(par);
+		});
+		$.BACK.getWaiterList();
+		function initTime(){
+			$('#startTime').datetimepicker();
+			$('#endTime').datetimepicker();
+		}
+		$('.searchBtn').click(function(){
+			param ={};
+			$('.searchParam').each(function(){
+				var id = $(this).attr("id");
+				param[id] =$(this).val();
+			});
+			$.BACK.manageWaiterList(param);	
+		}).eq(0).click();
+	}
+</script>
+#end
+#extends("/layout/layoutback.vm")
