@@ -5,6 +5,11 @@ import com.nl.security.web.auth.IRole;
 
 public class Role extends BaseDomain implements IRole {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Integer id;
 
 	private String roleName;
