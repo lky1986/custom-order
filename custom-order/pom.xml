@@ -289,6 +289,6 @@
 		</plugins>
 	</build>
 	<modules>
-		<module>order-web</module>
+		<module>custom-order-web</module>
 	</modules>
 </project>
