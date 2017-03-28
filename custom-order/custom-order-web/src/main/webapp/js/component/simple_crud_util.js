@@ -14,23 +14,23 @@ casino.simpleCrud = {
         }, getUrl: function (path) {
             return this.baseUrl() + "/" + path ;
         }, onEdit: function (result) {
-            if (result.success) {
-                casino.simpleCrud.setFormContent($("#content form[name='content_form']"), result.resultMap.entity);
+            if (result.status) {
+                casino.simpleCrud.setFormContent($("#content form[name='content_form']"), result.result.entity);
                 $("#tab_content_head").click();
             } else {
-                casino.simpleCrud.settings.showPrompt(result.description,result.resultCode);
+                casino.simpleCrud.settings.showPrompt(result.message,result.code);
             }
         }, beforeSave: function () {
             return true;
         }, afterSave: function (result) {
-            if (result.success) {
-                casino.simpleCrud.setFormContent($("#content form[name='content_form']"), result.resultMap.entity);
+            if (result.status) {
+                casino.simpleCrud.setFormContent($("#content form[name='content_form']"), result.result.entity);
                 $(casino.simpleCrud.settings.contentForm).find('[uneditable]').each(function () {
                     $(this).attr('disabled', true);
                 });
                 casino.simpleCrud.settings.showPrompt("保存成功","success");
             } else {
-                casino.simpleCrud.settings.showPrompt(result.description,result.resultCode);
+                casino.simpleCrud.settings.showPrompt(result.message,result.code);
             }
         }, getSaveData: function () {
             var data = {};
@@ -64,11 +64,11 @@ casino.simpleCrud = {
         }, beforeDelete: function () {
             return true;
         }, afterDelete: function (result) {
-            if (result.success) {
+            if (result.status) {
                 $(casino.simpleCrud.settings.dataListTable).dataTable().fnStandingRedraw(true) ;
                 casino.simpleCrud.settings.showPrompt("删除成功","success");
             } else {
-                casino.simpleCrud.settings.showPrompt(result.description,result.resultCode);
+                casino.simpleCrud.settings.showPrompt(result.message,result.code);
             }
         }, ajaxError: function () {
             casino.simpleCrud.settings.showPrompt("连接超时","warning");

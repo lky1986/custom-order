@@ -1,0 +1,177 @@
+#set($layout="layout/layoutback.vm" )
+#override("header")
+<title>JukeSlotBackend</title>
+#end
+#override("body")
+<body onload="load()">
+	<div class="pop_add pop" style="display:none">
+		<div class="tt">Add/Edit Device</div>
+		<div class="ct">
+			<div class="form_tab">
+				<dl>
+					<dt>Device #</dt>
+					<dd><input type="text" class="inp_sml_nolenth inp-ws2" id="driverNum"/></dd>
+				</dl>
+				<dl>
+					<dt>DeviceNo #</dt>
+					<dd><input type="text" class="inp_sml_nolenth inp-ws2" id="deviceNo"/></dd>
+				</dl>
+				<dl>
+					<dt>&nbsp;</dt>
+					<dd>
+					<a href="javascript:void(0);" class="glo-btn-g" id="addDevice">Confirm</a>
+					<a href="javascript:void(0);#" class="glo-btn-r mgl10" id="closeDevicePanel">cancel</a>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div class="pop_windows pop" style="display:none"></div>
+	<!--pop end-->
+	<div class="right_wrap">
+		<div class="selecter">
+			<a href="javascript:void(0);" class="glo-btn-g2b2" id="openDevicePanel">Add Device</a>
+		</div>
+		<div class="main_part pdt20">			
+			<table class="std_tab device_tab">
+				<thead>
+					<tr>
+						<td class="txs16">Number #</td>
+						<td class="txs16">Binded #</td>
+						<td class="txs16">&nbsp;</td>
+					</tr>
+				</thead>
+				<tbody id="driverList">
+					
+				</tbody>
+			</table>
+			<div class="pages pdt20 txal clearfix">
+					
+			</div>
+			
+		</div>
+	</div>
+</body>
+#end
+#override("footer")
+<script type="text/javascript">
+	var currentPage=1;
+	var total;
+	var pageSize;
+	function load(){
+		$.extend({
+			BACK:{
+				addDevice:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/driver/saveOrUpdate",
+							success:function(data){
+								var par={};
+								par["page"]=currentPage;
+								$.BACK.getDeviceList(par);
+							},
+							contentType:'application/json',
+							param:par
+						}
+					);
+				},
+				getDeviceList:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/driver/listJson",
+							success:function(data){
+								var result = data.result.rows;
+								var driverList = $("#driverList");
+								driverList.empty();
+								var dataList = result.dataList;
+								var content="";
+								for(index in dataList){
+									var data = dataList[index];
+									content+="<tr class='driverItem' driverId='"+data.id+"'>";
+									content+="<th class='txs16'>"+data.num+"</th>";
+									content+="<td class='txs16'>";
+									if(data.deviceNo&&data.deviceNo!=""){
+										content+="YES";
+									}else{
+										content+="NO";
+									}
+									content+="</td>";
+									content+="<td class='txs16'>";
+									content+="<a href='javascript:void(0);' class='glo-btn-r mgl10 delDirver'>Delete</a>";
+									content+="<a href='javascript:void(0);' class='glo-btn-r mgl10 editDirver'>Edit</a>";
+									content+="</td>";
+									content+="</tr>";
+									driverList.append(content);
+									content="";
+									driverList.find(".driverItem[driverId='"+data.id+"']").data(data);
+								}
+								total= result.total;
+								pageSize =result.pageSize;
+								var page = $.createPage(result.page,result.pageNum);
+								$(".pages").empty();
+								$(".pages").append(page);
+							},
+							param:par
+						}
+					);
+				},
+				delDevice:function(par){
+					$.BaseController.send(
+						{
+							url:contextPath+"/back/driver/delete",
+							success:function(data){
+								var par={};
+								if(((total-2)/pageSize+1)<currentPage)currentPage=(total-2)/pageSize+1;
+								par["page"]=currentPage;
+								$.BACK.getDeviceList(par);
+								$.BACK.getDeviceList();
+							},
+							param:par
+						}
+					);
+				}
+			}
+		});
+	
+		$("#openDevicePanel").click(function(){
+			$(".pop").show();
+			$(".pop").data(null);
+			$("#driverNum").val("");
+			$("#deviceNo").val("");
+		});
+		$("#closeDevicePanel").click(function(){
+			$(".pop").hide();
+			$(".pop").data(null);
+		});
+		$("#addDevice").click(function(){
+			var data = $(".pop").data();
+			var driverNum = $("#driverNum").val();
+			var deviceNo = $("#deviceNo").val();
+			var par = {"num":driverNum,"deviceNo":deviceNo};
+			if(data)par["id"]=data.id;
+			$.BACK.addDevice(par);
+			$(".pop").hide();
+		});
+		$("#driverList").on("click",".delDirver",function(){
+			var data= $(this).parents(".driverItem").data();
+			var par={"ids":[data.id]};
+			$.BACK.delDevice(par);
+		});
+		$("#driverList").on("click",".editDirver",function(){
+			var data= $(this).parents(".driverItem").data();
+			$("#driverNum").val(data.num);
+			$("#deviceNo").val(data.deviceNo);
+			$(".pop").data(data);
+			$(".pop").show();
+		});
+		$(".pages").on("click",".noton",function(){
+			var par = {};
+			currentPage=$(this).text();
+			par["page"]=currentPage;
+			$.BACK.getDeviceList(par);
+		});
+		$.BACK.getDeviceList();
+	}
+</script>
+#end
+#extends("/layout/layoutback.vm")

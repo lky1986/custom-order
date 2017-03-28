@@ -1,5 +1,5 @@
 #override("header")
-<title>JukeSlotBackend</title>
+<title>Beef O Bradys</title>
 #end
 #override("body")
 	<div class="pdt10 txac"><img src="../img/jukeslot_logo.png"/></div>

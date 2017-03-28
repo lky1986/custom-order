@@ -20,7 +20,7 @@
                             	
                                 <td><label class="control-label">用户名</label></td>
                                 <td class="textbox_ui">
-                                    <input type="text" class="span2 in_storage_num" name="username" >       
+                                    <input type="text" class="span2 in_storage_num" name="userCode" >       
                                 </td>
                             </tr>
     						<tr>
@@ -60,7 +60,7 @@
                     <thead>
                         <tr>
                             <th width="20" name="id"><input name="chkAll" type="checkbox" value="1" class="checkAll chIe6"/></th>
-                            <th name="username">用户名</th>
+                            <th name="userCode">用户名</th>
                             <th name="nickName">别名</th>
 							<th name="phone">电话</th>
 							<th name="email">email</th>
@@ -84,7 +84,7 @@
 								<label class="control-label">用户名</label>
                              </td>
 							 <td class="textbox_ui">	
-								<input type="text" class="span2 in_storage_num param" required id="username" name="username" uneditable>
+								<input type="text" class="span2 in_storage_num param" required id="userCode" name="userCode" uneditable>
 								<div class="invalid popover right">
                                     <div class="arrow"></div>
                                     <div class="required">请输入用户ID</div>
@@ -99,7 +99,6 @@
 								<input type="text" class="span2 in_storage_num param" id="nickName" name="nickName">
                              </td>
                           </tr>
-                          <!--
 						  <tr>
 							 <td>
 								<label class="control-label ">密码</label>
@@ -126,7 +125,6 @@
                                 </div>
 							 </td>
                           </tr>
-                          -->
 						  <tr>
 							  <td>
 								<label class="control-label ">email</label>

@@ -71,7 +71,6 @@
 	
 	<logger name="java.sql.Connection">
 		<level value="DEBUG" />
-		<appender-ref ref="console" />
 	</logger>
 	<!-- 
 	<logger name="java.sql.Statement">
