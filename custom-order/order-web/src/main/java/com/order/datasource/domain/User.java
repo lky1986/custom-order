@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.nl.common.db.domain.BaseDomain;
 import com.nl.security.web.auth.IRole;
 import com.nl.security.web.auth.IUser;
@@ -94,4 +96,15 @@ public class User extends BaseDomain implements IUser,Serializable {
 		this.phone = phone;
 	}
 
+	@Override
+	public Object getUserInfo() {
+		User user = ObjectUtils.clone(this);
+		user.setPassword("Protected");
+		return user;
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }
